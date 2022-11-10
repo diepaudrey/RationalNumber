@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../myExamples/include/rationalTest.hpp
+
+/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/myExamples/src/rationalTest.cpp
+rationalTest.hpp
+/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/myExamples/src/rationalTest.hpp
+iostream
+-
+

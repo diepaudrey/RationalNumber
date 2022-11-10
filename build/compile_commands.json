@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/INTERFACE",
+  "command": "/usr/bin/c++   -I/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/libRational/include    -Wall -Wextra -Wpedantic -pedantic-errors -o CMakeFiles/rationalNumber.dir/src/rational.cpp.o -c /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/libRational/src/rational.cpp",
+  "file": "/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/libRational/src/rational.cpp"
+},
+{
+  "directory": "/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/myExamples",
+  "command": "/usr/bin/c++   -I/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/libRational/include -I/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/myExamples/include    -Wall -Wextra -Wpedantic -pedantic-errors -o CMakeFiles/myExamples.dir/src/rationalTest.cpp.o -c /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/myExamples/src/rationalTest.cpp",
+  "file": "/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/myExamples/src/rationalTest.cpp"
+}
+]

@@ -1,0 +1,8 @@
+/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/CMakeFiles/rebuild_cache.dir
+/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/CMakeFiles/edit_cache.dir
+/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/INTERFACE/CMakeFiles/rebuild_cache.dir
+/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/INTERFACE/CMakeFiles/edit_cache.dir
+/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/INTERFACE/CMakeFiles/rationalNumber.dir
+/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/myExamples/CMakeFiles/edit_cache.dir
+/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/myExamples/CMakeFiles/rebuild_cache.dir
+/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/myExamples/CMakeFiles/myExamples.dir
