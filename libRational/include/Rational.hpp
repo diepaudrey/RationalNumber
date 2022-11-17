@@ -42,8 +42,6 @@ class Rational{
 
         //------------function----------
         Rational<T> inverse() const;
-
-
 };
 
 template<typename T>
@@ -77,7 +75,7 @@ Rational<T> Rational<T>::operator/(const Rational<T> &r) const{
     result.m_numerator = m_numerator*r.inverse().m_numerator;
     return result;
 }
-
+//-------------function-----------------
 template<typename T>
 Rational<T> Rational<T>::inverse()const{
     Rational<T> result;
@@ -87,6 +85,10 @@ Rational<T> Rational<T>::inverse()const{
     return result;
 }
 
+int pgcd(int a, int b);
+
+
+//------------cout--------------------
 template<typename T>
 std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
     if (r.m_denominator == 0){

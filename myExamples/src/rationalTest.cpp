@@ -11,6 +11,8 @@ int main(){
 
     //copy constructor
     Rational<int> fraction2(1,2);
+    int i = pgcd(12,4);
+    std::cout << i << std::endl;
 
     Rational<int> fraction3 = fraction/fraction2;
     //std::cout << "numerateur3 : " << fraction3.m_numerator << std::endl;
