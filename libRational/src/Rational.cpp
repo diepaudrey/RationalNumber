@@ -1,4 +1,4 @@
 //rational laugh
-#include "rational.hpp"
+#include "Rational.hpp"
 #include <iostream>
 
