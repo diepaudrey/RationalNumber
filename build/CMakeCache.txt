@@ -210,6 +210,12 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Value Computed by CMake
+Rational_BINARY_DIR:STATIC=/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/INTERFACE
+
+//Value Computed by CMake
+Rational_SOURCE_DIR:STATIC=/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/libRational
+
+//Value Computed by CMake
 cmakeRatio_BINARY_DIR:STATIC=/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build
 
 //Value Computed by CMake
@@ -220,18 +226,6 @@ myExamples_BINARY_DIR:STATIC=/home/audrey/Documents/IMAC/S3/RationalNumber/Ratio
 
 //Value Computed by CMake
 myExamples_SOURCE_DIR:STATIC=/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/myExamples
-
-//Value Computed by CMake
-rationalNumber_BINARY_DIR:STATIC=/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/INTERFACE
-
-//Value Computed by CMake
-rationalNumber_SOURCE_DIR:STATIC=/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/libRational
-
-//Value Computed by CMake
-simpleProject_BINARY_DIR:STATIC=/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/myExamples
-
-//Value Computed by CMake
-simpleProject_SOURCE_DIR:STATIC=/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/myExamples
 
 
 ########################

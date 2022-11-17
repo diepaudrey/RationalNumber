@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-../myExamples/include/rationalTest.hpp
+../libRational/include/rational.hpp
 
 /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/myExamples/src/rationalTest.cpp
-rationalTest.hpp
-/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/myExamples/src/rationalTest.hpp
+rational.hpp
+/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/myExamples/src/rational.hpp
 iostream
 -
 

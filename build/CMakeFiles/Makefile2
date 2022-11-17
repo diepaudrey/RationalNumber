@@ -74,7 +74,7 @@ clean: myExamples/clean
 # Directory level rules for directory INTERFACE
 
 # Recursive "all" directory target.
-INTERFACE/all: INTERFACE/CMakeFiles/rationalNumber.dir/all
+INTERFACE/all: INTERFACE/CMakeFiles/Rational.dir/all
 
 .PHONY : INTERFACE/all
 
@@ -84,7 +84,7 @@ INTERFACE/preinstall:
 .PHONY : INTERFACE/preinstall
 
 # Recursive "clean" directory target.
-INTERFACE/clean: INTERFACE/CMakeFiles/rationalNumber.dir/clean
+INTERFACE/clean: INTERFACE/CMakeFiles/Rational.dir/clean
 
 .PHONY : INTERFACE/clean
 
@@ -107,31 +107,31 @@ myExamples/clean: myExamples/CMakeFiles/myExamples.dir/clean
 .PHONY : myExamples/clean
 
 #=============================================================================
-# Target rules for target INTERFACE/CMakeFiles/rationalNumber.dir
+# Target rules for target INTERFACE/CMakeFiles/Rational.dir
 
 # All Build rule for target.
-INTERFACE/CMakeFiles/rationalNumber.dir/all:
-	$(MAKE) -f INTERFACE/CMakeFiles/rationalNumber.dir/build.make INTERFACE/CMakeFiles/rationalNumber.dir/depend
-	$(MAKE) -f INTERFACE/CMakeFiles/rationalNumber.dir/build.make INTERFACE/CMakeFiles/rationalNumber.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/CMakeFiles --progress-num=3,4 "Built target rationalNumber"
-.PHONY : INTERFACE/CMakeFiles/rationalNumber.dir/all
+INTERFACE/CMakeFiles/Rational.dir/all:
+	$(MAKE) -f INTERFACE/CMakeFiles/Rational.dir/build.make INTERFACE/CMakeFiles/Rational.dir/depend
+	$(MAKE) -f INTERFACE/CMakeFiles/Rational.dir/build.make INTERFACE/CMakeFiles/Rational.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/CMakeFiles --progress-num=1,2 "Built target Rational"
+.PHONY : INTERFACE/CMakeFiles/Rational.dir/all
 
 # Build rule for subdir invocation for target.
-INTERFACE/CMakeFiles/rationalNumber.dir/rule: cmake_check_build_system
+INTERFACE/CMakeFiles/Rational.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 INTERFACE/CMakeFiles/rationalNumber.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 INTERFACE/CMakeFiles/Rational.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/CMakeFiles 0
-.PHONY : INTERFACE/CMakeFiles/rationalNumber.dir/rule
+.PHONY : INTERFACE/CMakeFiles/Rational.dir/rule
 
 # Convenience name for target.
-rationalNumber: INTERFACE/CMakeFiles/rationalNumber.dir/rule
+Rational: INTERFACE/CMakeFiles/Rational.dir/rule
 
-.PHONY : rationalNumber
+.PHONY : Rational
 
 # clean rule for target.
-INTERFACE/CMakeFiles/rationalNumber.dir/clean:
-	$(MAKE) -f INTERFACE/CMakeFiles/rationalNumber.dir/build.make INTERFACE/CMakeFiles/rationalNumber.dir/clean
-.PHONY : INTERFACE/CMakeFiles/rationalNumber.dir/clean
+INTERFACE/CMakeFiles/Rational.dir/clean:
+	$(MAKE) -f INTERFACE/CMakeFiles/Rational.dir/build.make INTERFACE/CMakeFiles/Rational.dir/clean
+.PHONY : INTERFACE/CMakeFiles/Rational.dir/clean
 
 #=============================================================================
 # Target rules for target myExamples/CMakeFiles/myExamples.dir
@@ -140,7 +140,7 @@ INTERFACE/CMakeFiles/rationalNumber.dir/clean:
 myExamples/CMakeFiles/myExamples.dir/all:
 	$(MAKE) -f myExamples/CMakeFiles/myExamples.dir/build.make myExamples/CMakeFiles/myExamples.dir/depend
 	$(MAKE) -f myExamples/CMakeFiles/myExamples.dir/build.make myExamples/CMakeFiles/myExamples.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/CMakeFiles --progress-num=1,2 "Built target myExamples"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/CMakeFiles --progress-num=3,4 "Built target myExamples"
 .PHONY : myExamples/CMakeFiles/myExamples.dir/all
 
 # Build rule for subdir invocation for target.

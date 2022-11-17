@@ -1,19 +1,58 @@
+# cmake_minimum_required(VERSION 3.13)
+
+# # give a name to the project
+# project(rationalNumber)
+
+# # file to compile and name of the executable = ligne de ce qu'on va executer
+# add_executable(rationalNumber src/rational.cpp include/rational.hpp)
+
+# # include directory
+# target_include_directories(rationalNumber PRIVATE "include")
+
+# # compilation options
+# target_compile_features(rationalNumber PRIVATE cxx_std_11) # use at least c++ 11
+# if (MSVC)
+#     target_compile_options(rationalNumber PRIVATE /W3)
+# else()
+#     target_compile_options(rationalNumber PRIVATE -Wall -Wextra -Wpedantic -pedantic-errors)
+# endif()
+
+
 cmake_minimum_required(VERSION 3.13)
 
 # give a name to the project
-project(rationalNumber)
+project(Rational LANGUAGES C CXX)
 
-# file to compile and name of the executable = ligne de ce qu'on va executer
-add_executable(rationalNumber src/rational.cpp include/rational.hpp)
+# automatic get all files in a directory
+file(GLOB_RECURSE source_files src/*.cpp)
+file(GLOB_RECURSE header_files include/*.hpp)
+
+
+# Instructions to compile a library (no main() inside)
+# default STATIC ??
+# SHARED to make a .so instead of a .a
+# add_library(ganQ SHARED ${source_files} ${header_files})
+add_library(Rational ${source_files} ${header_files})
+
+# compilation flags
+target_compile_features(Rational PRIVATE cxx_std_11) # use at least c++ 11
+if (MSVC)
+    target_compile_options(Rational PRIVATE /W3)
+else()
+    target_compile_options(Rational PRIVATE -Wall -Wextra -Wpedantic -pedantic-errors)
+endif()
 
 # include directory
-target_include_directories(rationalNumber PRIVATE "include")
+target_include_directories(Rational PRIVATE "include")
 
-# compilation options
-target_compile_features(rationalNumber PRIVATE cxx_std_11) # use at least c++ 11
-if (MSVC)
-    target_compile_options(rationalNumber PRIVATE /W3)
-else()
-    target_compile_options(rationalNumber PRIVATE -Wall -Wextra -Wpedantic -pedantic-errors)
-endif()
+# install (optional, install a lib is not mandatory)
+install(FILES ${header_files} DESTINATION /usr/local/include/Rational)
+install(TARGETS Rational
+        RUNTIME DESTINATION /usr/local/lib
+        LIBRARY DESTINATION /usr/local/lib
+        ARCHIVE DESTINATION /usr/local/lib)
+
+
+
+
 

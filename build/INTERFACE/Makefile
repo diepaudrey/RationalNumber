@@ -56,6 +56,52 @@ CMAKE_BINARY_DIR = /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -111,19 +157,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-INTERFACE/CMakeFiles/rationalNumber.dir/rule:
-	cd /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build && $(MAKE) -f CMakeFiles/Makefile2 INTERFACE/CMakeFiles/rationalNumber.dir/rule
-.PHONY : INTERFACE/CMakeFiles/rationalNumber.dir/rule
+INTERFACE/CMakeFiles/Rational.dir/rule:
+	cd /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build && $(MAKE) -f CMakeFiles/Makefile2 INTERFACE/CMakeFiles/Rational.dir/rule
+.PHONY : INTERFACE/CMakeFiles/Rational.dir/rule
 
 # Convenience name for target.
-rationalNumber: INTERFACE/CMakeFiles/rationalNumber.dir/rule
+Rational: INTERFACE/CMakeFiles/Rational.dir/rule
 
-.PHONY : rationalNumber
+.PHONY : Rational
 
 # fast build rule for target.
-rationalNumber/fast:
-	cd /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build && $(MAKE) -f INTERFACE/CMakeFiles/rationalNumber.dir/build.make INTERFACE/CMakeFiles/rationalNumber.dir/build
-.PHONY : rationalNumber/fast
+Rational/fast:
+	cd /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build && $(MAKE) -f INTERFACE/CMakeFiles/Rational.dir/build.make INTERFACE/CMakeFiles/Rational.dir/build
+.PHONY : Rational/fast
 
 src/rational.o: src/rational.cpp.o
 
@@ -131,7 +177,7 @@ src/rational.o: src/rational.cpp.o
 
 # target to build an object file
 src/rational.cpp.o:
-	cd /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build && $(MAKE) -f INTERFACE/CMakeFiles/rationalNumber.dir/build.make INTERFACE/CMakeFiles/rationalNumber.dir/src/rational.cpp.o
+	cd /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build && $(MAKE) -f INTERFACE/CMakeFiles/Rational.dir/build.make INTERFACE/CMakeFiles/Rational.dir/src/rational.cpp.o
 .PHONY : src/rational.cpp.o
 
 src/rational.i: src/rational.cpp.i
@@ -140,7 +186,7 @@ src/rational.i: src/rational.cpp.i
 
 # target to preprocess a source file
 src/rational.cpp.i:
-	cd /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build && $(MAKE) -f INTERFACE/CMakeFiles/rationalNumber.dir/build.make INTERFACE/CMakeFiles/rationalNumber.dir/src/rational.cpp.i
+	cd /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build && $(MAKE) -f INTERFACE/CMakeFiles/Rational.dir/build.make INTERFACE/CMakeFiles/Rational.dir/src/rational.cpp.i
 .PHONY : src/rational.cpp.i
 
 src/rational.s: src/rational.cpp.s
@@ -149,7 +195,7 @@ src/rational.s: src/rational.cpp.s
 
 # target to generate assembly for a file
 src/rational.cpp.s:
-	cd /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build && $(MAKE) -f INTERFACE/CMakeFiles/rationalNumber.dir/build.make INTERFACE/CMakeFiles/rationalNumber.dir/src/rational.cpp.s
+	cd /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build && $(MAKE) -f INTERFACE/CMakeFiles/Rational.dir/build.make INTERFACE/CMakeFiles/Rational.dir/src/rational.cpp.s
 .PHONY : src/rational.cpp.s
 
 # Help Target
@@ -158,9 +204,13 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... install/strip"
+	@echo "... install/local"
+	@echo "... install"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... rationalNumber"
+	@echo "... Rational"
 	@echo "... src/rational.o"
 	@echo "... src/rational.i"
 	@echo "... src/rational.s"

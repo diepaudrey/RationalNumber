@@ -1,7 +1,7 @@
 [
 {
   "directory": "/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/build/INTERFACE",
-  "command": "/usr/bin/c++   -I/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/libRational/include    -Wall -Wextra -Wpedantic -pedantic-errors -o CMakeFiles/rationalNumber.dir/src/rational.cpp.o -c /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/libRational/src/rational.cpp",
+  "command": "/usr/bin/c++   -I/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/libRational/include    -Wall -Wextra -Wpedantic -pedantic-errors -o CMakeFiles/Rational.dir/src/rational.cpp.o -c /home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/libRational/src/rational.cpp",
   "file": "/home/audrey/Documents/IMAC/S3/RationalNumber/RationalNumber/libRational/src/rational.cpp"
 },
 {
