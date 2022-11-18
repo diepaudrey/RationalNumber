@@ -202,7 +202,7 @@ Rational<T> Rational<T>::irreducibleFraction(){
 }
 
 template<typename T>
-Rational<T> Rational<T>::vabs()){
+Rational<T> Rational<T>::vabs(){
     //-----condition 0 à revoir-----
     if(this->m_numerator==0){
         this->m_numerator=0;
@@ -225,8 +225,8 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
     else if (r.getNumerator() == 0){
         stream<< "0/1";
     }
-    else if (r.getNumerator<0 && r.getDenominator<0){
-        stream<<-r.getNumerator<<"/"<<-r.getDenominator;
+    else if (r.getNumerator()<0 && r.getDenominator()<0){
+        stream<<-r.getNumerator()<<"/"<<-r.getDenominator();
     }
     else
         stream<< r.getNumerator() << "/" << r.getDenominator();
