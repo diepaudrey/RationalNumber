@@ -1,24 +1,28 @@
-
-#include "rational.hpp" 
+//haaaaa
+#include "Rational.hpp" 
 #include <iostream>
 
 int main(){
     
-    // //initialize tests
-    // Rational<int> fraction(2,5);
-    // std::cout << "numerateur : " << fraction.m_numerator << std::endl;
-    // std::cout << "deno : " << fraction.m_denominator << std::endl;
+    //initialize tests
+    Rational<int> fraction(1,-5);
 
-    // //copy constructor
-    // Rational<int> fraction2(fraction);
-    // std::cout << "numerateur2 : " << fraction2.m_numerator << std::endl;
-    // std::cout << "deno2 : " << fraction2.m_denominator << std::endl;
+    //copy constructor
+    Rational<int> fraction2(1,-2);
 
-    // Rational<int> fraction3;
-    // std::cout << "numerateur3 : " << fraction3.m_numerator << std::endl;
-    // std::cout << "deno3 : " << fraction3.m_denominator << std::endl;
+    int i = pgcd(12,4);
+    //std::cout << i << std::endl;
 
-    std::cout << "ça marche ??" << std::endl;
+    Rational<int> fraction3 = fraction/fraction2;
+    //std::cout << fraction3 << std::endl;
+
+    Rational<int> fraction4(1,-3);
+    std::cout << fraction4.vabs() << std::endl;
+    std::cout << fraction4 << std::endl;
+    std::cout << -fraction4 << std::endl;
+    
+
+
 
     return 0;
 }

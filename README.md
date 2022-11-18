@@ -9,4 +9,4 @@ How to run :
 mkdir build 
 cd build 
 cmake .. 
-./bin/myExamples
+./bin/rationalTest
