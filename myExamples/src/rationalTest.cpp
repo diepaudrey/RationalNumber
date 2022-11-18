@@ -2,19 +2,31 @@
 #include "Rational.hpp" 
 #include <iostream>
 
+
 int main(){
     
     //initialize tests
-    Rational<int> fraction(1,-5);
+    Rational<int> fraction(8,2);
+    std::cout << "fraction : " << fraction << std::endl;
+
+    std::cout << "irreducible fraction : " << fraction.irreducibleFraction() << std::endl;
 
     //copy constructor
-    Rational<int> fraction2(1,-2);
+    Rational<int> fraction2(4,2);
+    
+    Rational<int> fraction3 = fraction - fraction2;
+    //std::cout << "numerateur3 : " << fraction3.m_numerator << std::endl;
+    //std::cout << "deno3 : " << fraction3.m_denominator << std::endl;
 
-    int i = pgcd(12,4);
-    //std::cout << i << std::endl;
+    std::cout << fraction << " - " << fraction2 << " = " << fraction3 << std::endl;
 
-    Rational<int> fraction3 = fraction/fraction2;
-    //std::cout << fraction3 << std::endl;
+
+    //testing comparative operators
+    bool result = fraction!=fraction2;
+    std::cout << result << std::endl; 
+
+    bool result2 = fraction<fraction2;
+    std::cout << result2 << std::endl; 
 
     Rational<int> fraction4(1,-3);
     std::cout << fraction4.vabs() << std::endl;
