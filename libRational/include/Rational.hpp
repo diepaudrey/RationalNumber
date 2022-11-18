@@ -8,6 +8,32 @@
 #ifndef __RATIONAL__HPP
 #define __RATIONAL__HPP
 
+// Doxygen menu
+/// \version 0.1
+/// \mainpage
+/// \image html chips.jpeg
+/// \tableofcontents
+/// \section instroduction_sec What for?
+/// Rational is a super tool.
+/// \section install_bigsec How to install
+/// \subsection dependencies_sec Dependecies
+/// \li nothing
+/// \li Doxygen (if you want the documentation)
+/// \subsection install_sec Install with cmake (Linux / Mac)
+/// \li go to main dir
+/// \li mkdir build
+/// \li cd build
+/// \li cmake ..
+/// \li make
+/// \li if Doxygen installed: make html
+/// \li The documentation is located in :
+/// 	- [path to build]/doc/doc-doxygen/html/index.html or 
+/// 	- or [path to build]/INTERFACE/doc/doc-doxygen/html/index.html
+
+
+
+/// \class Rational
+/// \brief class defining a rational.
 template <class T>
 class Rational{
     private : 
@@ -39,12 +65,13 @@ class Rational{
             {};
 
         //destructor
+        /// \brief destructor
         ~Rational() = default;
 
         //------------operator----------
         Rational<T> operator+(const Rational<T> &r) const; 
         Rational<T> operator-(const Rational<T> &r) const; 
-         Rational<T> operator-() const; 
+        Rational<T> operator-() const; 
         Rational<T> operator*(const Rational<T> &r) const; 
         Rational<T> operator/(const Rational<T> &r) const; 
 
@@ -179,8 +206,6 @@ bool Rational<T>::operator<=(const Rational<T> &r) const{
 
 }
 
-
-
 //-------------function-----------------
 template<typename T>
 Rational<T> Rational<T>::inverse()const{
@@ -232,8 +257,6 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
         stream<< r.getNumerator() << "/" << r.getDenominator();
     return stream;
 }
-
-
 
 #endif
        

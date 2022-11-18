@@ -28,10 +28,13 @@ int main(){
     bool result2 = fraction<fraction2;
     std::cout << result2 << std::endl; 
 
-    Rational<int> fraction4(1,-3);
-    std::cout << fraction4.vabs() << std::endl;
+    Rational<int> fraction4(-1,-3);
+
     std::cout << fraction4 << std::endl;
     std::cout << -fraction4 << std::endl;
+     std::cout << fraction4 << std::endl;
+    std::cout << fraction4.vabs() << std::endl;
+    std::cout << fraction4 << std::endl;
     
 
 
