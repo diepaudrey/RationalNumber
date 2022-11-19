@@ -14,7 +14,7 @@
 /// \image html chips.jpeg
 /// \tableofcontents
 /// \section instroduction_sec What for?
-/// Rational is a super tool.
+/// Rational is a super tool which grants you the power to use and manipulate rational numbers in a simple way.
 /// \section install_bigsec How to install
 /// \subsection dependencies_sec Dependecies
 /// \li nothing
@@ -46,7 +46,9 @@ class Rational{
         //     : m_numerator(num), m_denominator(deno)
         //     {};
 
-        //constructor with test
+        /// \brief constructor from given values which tests if 0 is the denominator
+        /// \param num : the numerator
+        /// \param num : the denominator
         Rational(const T num, const T deno){
             assert(deno!=0 && "error: 0 is not a possible value");
             m_numerator = num;
@@ -54,32 +56,74 @@ class Rational{
             this->irreducibleFraction();
         }
 
-        //copy constructor
+        /// \brief copy-constructor
+        /// \param ratio : the rational number to be copied
         Rational(const Rational &ratio)
             : m_numerator(ratio.m_numerator), m_denominator(ratio.m_denominator)
             {};
 
-        //default construtor
+        /// \brief default constructor = 0/1
         Rational()
             :m_numerator(0), m_denominator(1)
             {};
 
-        //destructor
         /// \brief destructor
         ~Rational() = default;
 
         //------------operator----------
+        
+        /// \brief adds 2 rational numbers
+	    /// \param r : rational number to add to the calling rational number
+	    /// \return the sum of the current rational and the argument rational
         Rational<T> operator+(const Rational<T> &r) const; 
+
+        /// \brief substracts 2 rational numbers
+	    /// \param r : rational number to substract to the calling rational number
+	    /// \return the substraction of the current rational and the argument rational 
         Rational<T> operator-(const Rational<T> &r) const; 
+
+        /// \brief unary minus
+	    /// \return the minus of the current rational 
         Rational<T> operator-() const; 
+
+        /// \brief multiplies 2 rational numbers
+	    /// \param r : the rational number the calling rational will be multplied by
+	    /// \return the multiplication of the current rational and the argument rational 
         Rational<T> operator*(const Rational<T> &r) const; 
+
+        /// \brief divides 2 rational numbers
+	    /// \param r : the rational number the calling rational will be divided by (should not have a numerator equal to 0)
+	    /// \return the division of the current rational and the argument rational 
         Rational<T> operator/(const Rational<T> &r) const; 
 
+        /// \brief checks if 2 rationals are equals
+	    /// \param r : the rational number the calling rational will be compared to
+	    /// \return true if the argument rational and the current are equals
         bool operator==(const Rational<T> &r)const;
+
+        /// \brief checks if 2 rationals are equals
+	    /// \param r : the rational number the calling rational will be compared to
+	    /// \return true if the argument rational and the current are not equals
         bool operator!=(const Rational<T> &r) const;
+
+        /// \brief checks if the current rational is greater than the argument rational
+	    /// \param r : the rational number the calling rational will be compared to
+	    /// \return true if the current rational is greater than the argument rational
         bool operator>(const Rational<T> &r) const;
+
+        /// \brief checks if the current rational is less than the argument rational
+	    /// \param r : the rational number the calling rational will be compared to
+	    /// \return true if the current rational is less than the argument rational
         bool operator<(const Rational<T> &r) const;
+
+        /// \brief checks if the current rational is greater than or equal to the argument rational
+	    /// \param r : the rational number the calling rational will be compared to
+	    /// \return true if the current rational is greater than or equal to the argument rational
         bool operator<=(const Rational<T> &r) const;
+
+        /// \brief checks if the current rational is less than or equal to the argument rational
+	    /// \param r : the rational number the calling rational will be compared to
+	    /// \return true if the current rational is less than or equal to the argument rational
         bool operator>=(const Rational<T> &r) const;
 
 
@@ -119,6 +163,7 @@ Rational<T> Rational<T>::operator+(const Rational<T> &r) const{
     result.m_denominator=(m_denominator*r.m_denominator);
     return result.irreducibleFraction();
 }
+//do an affectation operator with = ?
 
 template<typename T>
 Rational<T> Rational<T>::operator-() const{
@@ -207,6 +252,9 @@ bool Rational<T>::operator<=(const Rational<T> &r) const{
 }
 
 //-------------function-----------------
+
+/// \brief inverses the current rational and put it into its irreductible form
+/// \return : the inverse of the current rational under its irreductible form
 template<typename T>
 Rational<T> Rational<T>::inverse()const{
     Rational<T> result;
@@ -216,6 +264,8 @@ Rational<T> Rational<T>::inverse()const{
     return result.irreducibleFraction();
 }
 
+/// \brief put the current rational into its irreductible form
+/// \return : the current rational under its irreductible form
 template<typename T>
 Rational<T> Rational<T>::irreducibleFraction(){
     int pgcd = std::__gcd(m_numerator,m_denominator);
@@ -226,6 +276,8 @@ Rational<T> Rational<T>::irreducibleFraction(){
     return *(this);
 }
 
+/// \brief computes the absolute value of the current rational
+/// \return : the absolute value of the current rational
 template<typename T>
 Rational<T> Rational<T>::vabs(){
     //-----condition 0 à revoir-----
@@ -242,6 +294,11 @@ Rational<T> Rational<T>::vabs(){
 }
 
 //------------cout--------------------
+
+/// \brief overload the operator << for Rational
+/// \param stream : input stream
+/// \param r : the rational number to output
+/// \return the output stream containing the rational data      
 template<typename T>
 std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
     if (r.getNumerator() == 0){
