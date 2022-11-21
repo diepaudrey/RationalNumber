@@ -47,4 +47,10 @@ include_directories(${CMAKE_SOURCE_DIR}/libRational/include) # important : other
 message(STATUS "myExamples cmake part ..." )
 add_subdirectory(myExamples)
 
+# add google test
+message(STATUS "google test cmake part ..." )
+add_subdirectory(googletest)
 
+# add myTest
+message(STATUS "myTest cmake part ..." )
+add_subdirectory(myTest)

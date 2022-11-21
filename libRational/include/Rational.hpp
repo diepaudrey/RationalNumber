@@ -4,6 +4,7 @@
 #include<cassert>
 #include <iostream>
 #include <algorithm>
+#include <fstream>
 
 #ifndef __RATIONAL__HPP
 #define __RATIONAL__HPP
@@ -150,10 +151,16 @@ class Rational{
             return m_denominator;
         }
 
-        //------------function----------
+        //------------arithmetic----------
         Rational<T> inverse() const;
         Rational<T> irreducibleFraction() ;
         Rational<T> vabs();
+
+        //----------other-----------------
+        /// \brief load a rational from a file
+        /// \param filemane : name of the file (including path) to open and load the vector data
+        /// \throw exception if can not open file
+        void load(const std::string &filename);
 };
 
 template<typename T>
@@ -313,6 +320,27 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
     else
         stream<< r.getNumerator() << "/" << r.getDenominator();
     return stream;
+}
+
+//jsp a quoi ca sert je pensais que ca ouvrait les unitest
+template<typename T>
+void Rational<T>::load(const std::string &filename){
+
+	//open the file
+	std::ifstream myfile;
+	myfile.open(filename, std::ios::in | std::ios::binary); 
+	if(!myfile.is_open()){
+		throw std::ios_base::failure("Rational::load: error: can not open file: " + filename);
+	}
+
+	// read the data
+	myfile >> m_numerator;
+    myfile >> m_denominator;
+
+    
+
+	// close file
+	myfile.close();
 }
 
 #endif
