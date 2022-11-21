@@ -19,10 +19,10 @@ TEST (RationalConstructor, defaultConstructor) {
 
 
 
-// /////////////////////////////////////////////////////
-// // arithmetic
+/////////////////////////////////////////////////////
+// arithmetic
 
-// TEST (VectorDArithmetic, plus) {
+// TEST (RationalArithmetic, plus) {
 
 // 	const size_t maxSize = 1000;  // max size of the tested vectors
 // 	std::mt19937 generator(0);
@@ -33,27 +33,21 @@ TEST (RationalConstructor, defaultConstructor) {
 // 	// run many times the same test with different values
 // 	for(int run=0; run<100; ++run){
 
-// 		// define a vector dimension
-// 		const size_t dim = uniformIntDistribution(generator);
 
-// 		// generate random data
-// 		std::vector<double> data1(dim), data2(dim);
-// 		std::generate(data1.begin(), data1.end(), gen);
-// 		std::generate(data2.begin(), data2.end(), gen);
+//     double numerator1 = gen();
+//     double denominator1 = gen();
+//     double numerator2 = gen();
+//     double denominator2 = gen();
 
 // 		// build the corresponding VectorD
-// 		VectorD vec1(dim), vec2(dim), vec3(dim);
-// 		for(size_t i=0; i<dim; ++i){
-// 			vec1[i] = data1[i];
-// 			vec2[i] = data2[i];
-// 		}
+// 		Rational<double> r1(numerator1,denominator1),r2(numerator2,denominator2);
+		
+//     //need convert float to ratio
+// 		double r3 = (numerator1/denominator1) + (numerator2/denominator2);
 
-// 		vec3 = vec1 + vec2;
-// 		ASSERT_EQ (vec3.size(), dim);
+	
+// 	  ASSERT_DOUBLE_EQ (r3, r1 + r2);    // EXPECT_DOUBLE_EQ would be fine too
 
-// 		for(size_t i=0; i<dim; ++i){
-// 	    	ASSERT_DOUBLE_EQ (vec3[i], data1[i] + data2[i]);    // EXPECT_DOUBLE_EQ would be fine too
-// 		}
 // 	}
 // }
 

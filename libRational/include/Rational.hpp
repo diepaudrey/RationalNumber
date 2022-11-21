@@ -143,24 +143,33 @@ class Rational{
            
         // }
 
+        /// \brief getter for the numerator
+        /// \return the numerator of the rational number
         T getNumerator()const{
             return m_numerator;
         }
 
+        /// \brief getter for the denominator
+        /// \return the denominator of the rational number
         T getDenominator()const{
             return m_denominator;
         }
 
-        //------------arithmetic----------
+        //------------arithmetic----------*
+        
+        /// \brief inverses the current rational and put it into its irreductible form
+        /// \return : the inverse of the current rational under its irreductible form
         Rational<T> inverse() const;
+
+        /// \brief put the current rational into its irreductible form
+        /// \return : the current rational under its irreductible form
         Rational<T> irreducibleFraction() ;
+
+        /// \brief computes the absolute value of the current rational
+        /// \return : the absolute value of the current rational
         Rational<T> vabs();
 
-        //----------other-----------------
-        /// \brief load a rational from a file
-        /// \param filemane : name of the file (including path) to open and load the vector data
-        /// \throw exception if can not open file
-        void load(const std::string &filename);
+        
 };
 
 template<typename T>
@@ -322,26 +331,7 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
     return stream;
 }
 
-//jsp a quoi ca sert je pensais que ca ouvrait les unitest
-template<typename T>
-void Rational<T>::load(const std::string &filename){
 
-	//open the file
-	std::ifstream myfile;
-	myfile.open(filename, std::ios::in | std::ios::binary); 
-	if(!myfile.is_open()){
-		throw std::ios_base::failure("Rational::load: error: can not open file: " + filename);
-	}
-
-	// read the data
-	myfile >> m_numerator;
-    myfile >> m_denominator;
-
-    
-
-	// close file
-	myfile.close();
-}
 
 #endif
        
