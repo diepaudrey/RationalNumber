@@ -130,18 +130,18 @@ class Rational{
 
         //------------setters-getters-----
 
-        //à supprimer si pas utiliser 
+        //utile pour les test unitaire c'ets pour ça c'est mieux d'avoir les test dans la lib 
 
-        // void setNumerator(const T numerator){
-        //     m_numerator = numerator;
-        // }
+        void setNumerator(const T numerator){
+            m_numerator = numerator;
+        };
 
-        // void setDenominator(const T denominator){
-        //     if(denominator != 0){
-        //         m_denominator = denominator;
-        //     }
+        void setDenominator(const T denominator){
+            if(denominator != 0){
+                m_denominator = denominator;
+            }
            
-        // }
+        };
 
         /// \brief getter for the numerator
         /// \return the numerator of the rational number
@@ -154,6 +154,8 @@ class Rational{
         T getDenominator()const{
             return m_denominator;
         }
+
+        
 
         //------------arithmetic----------*
         
@@ -169,6 +171,9 @@ class Rational{
         /// \return : the absolute value of the current rational
         Rational<T> vabs();
 
+        /// \brief convert a float to ratio
+        /// \return : a rational
+        static Rational<T> convertFloatRatio(double x, unsigned int nbIter);
         
 };
 
@@ -309,6 +314,7 @@ Rational<T> Rational<T>::vabs(){
     return *this;
 }
 
+
 //------------cout--------------------
 
 /// \brief overload the operator << for Rational
@@ -331,6 +337,27 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
     return stream;
 }
 
+template<typename T>
+Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
+    Rational<T> result;
+    if(x==0){
+        return result;
+    }
+    if(nbIter == 0){
+        return result;
+    }
+    if(x<1){
+        double p = 1/x;
+        Rational<int> r = convertFloatRatio(p,nbIter);
+        return r.inverse();
+    }
+    if(x>=1){
+        double pint = floor(x);
+        Rational<int> q(pint,1);
+        return q+convertFloatRatio(x-pint, nbIter-1);
+    }
+    return result;
+}
 
 
 #endif

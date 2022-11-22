@@ -22,8 +22,8 @@ int main(){
 
 
     //testing comparative operators
-    bool result = fraction!=fraction2;
-    std::cout << result << std::endl; 
+    //bool result = fraction!=fraction2;
+    //std::cout << result << std::endl; 
 
     bool result2 = fraction<fraction2;
     std::cout << result2 << std::endl; 
@@ -44,6 +44,8 @@ int main(){
         std::cout << ":(" << std::endl;
     } 
     
-
+    double test = 1.2589;
+    Rational<int> result = Rational<int>::convertFloatRatio(test,1000);
+    std::cout << result << std::endl;
     return 0;
 }

@@ -22,34 +22,37 @@ TEST (RationalConstructor, defaultConstructor) {
 /////////////////////////////////////////////////////
 // arithmetic
 
-// TEST (RationalArithmetic, plus) {
+TEST (RationalArithmetic, plus) {
 
-// 	const size_t maxSize = 1000;  // max size of the tested vectors
-// 	std::mt19937 generator(0);
-// 	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
-// 	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
-// 	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
+	const size_t maxSize = 1000;  // max size of the tested vectors
+	std::mt19937 generator(0);
+	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
+	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
+	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
 
-// 	// run many times the same test with different values
-// 	for(int run=0; run<100; ++run){
+	// run many times the same test with different values
+	for(int run=0; run<100; ++run){
 
 
-//     double numerator1 = gen();
-//     double denominator1 = gen();
-//     double numerator2 = gen();
-//     double denominator2 = gen();
+    int numerator1 = gen();
+    int denominator1 = gen();
+    int numerator2 = gen();
+    int denominator2 = gen();
 
-// 		// build the corresponding VectorD
-// 		Rational<double> r1(numerator1,denominator1),r2(numerator2,denominator2);
+		// build the corresponding VectorD
+		Rational<int> r1(numerator1,denominator1),r2(numerator2,denominator2);
 		
-//     //need convert float to ratio
-// 		double r3 = (numerator1/denominator1) + (numerator2/denominator2);
-
+    	//need convert float to ratio
+		Rational<int> r3;
+		r3.setNumerator(numerator1*denominator2+numerator2*denominator1);
+		r3.setDenominator(denominator1*denominator2);
+		r3.irreducibleFraction();
+    
 	
-// 	  ASSERT_DOUBLE_EQ (r3, r1 + r2);    // EXPECT_DOUBLE_EQ would be fine too
+	  ASSERT_EQ (r3,r1+r2);    // EXPECT_DOUBLE_EQ would be fine too
 
-// 	}
-// }
+	}
+}
 
 
 // TEST (VectorDArithmetic, minus) {
