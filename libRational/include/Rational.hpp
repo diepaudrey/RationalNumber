@@ -274,8 +274,6 @@ bool Rational<T>::operator<=(const Rational<T> &r) const{
 
 //-------------function-----------------
 
-/// \brief inverses the current rational and put it into its irreductible form
-/// \return : the inverse of the current rational under its irreductible form
 template<typename T>
 Rational<T> Rational<T>::inverse()const{
     Rational<T> result;
@@ -285,8 +283,6 @@ Rational<T> Rational<T>::inverse()const{
     return result.irreducibleFraction();
 }
 
-/// \brief put the current rational into its irreductible form
-/// \return : the current rational under its irreductible form
 template<typename T>
 Rational<T> Rational<T>::irreducibleFraction(){
     int pgcd = std::__gcd(m_numerator,m_denominator);
@@ -297,8 +293,6 @@ Rational<T> Rational<T>::irreducibleFraction(){
     return *(this);
 }
 
-/// \brief computes the absolute value of the current rational
-/// \return : the absolute value of the current rational
 template<typename T>
 Rational<T> Rational<T>::vabs(){
     //-----condition 0 à revoir-----
@@ -340,6 +334,9 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
 template<typename T>
 Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
     Rational<T> result;
+    if (x<0){
+        return -(convertFloatRatio(-x,nbIter));
+    }
     if(x==0){
         return result;
     }

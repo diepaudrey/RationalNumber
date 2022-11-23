@@ -33,6 +33,7 @@ int main(){
     std::cout << fraction4 << std::endl;
     std::cout << -fraction4 << std::endl;
     std::cout << fraction4 << std::endl;
+    std::cout << fraction4.inverse() << std::endl;
     std::cout << fraction4.vabs() << std::endl;
     std::cout << fraction4 << std::endl;
 
@@ -44,7 +45,7 @@ int main(){
         std::cout << ":(" << std::endl;
     } 
     
-    double test = 1.2589;
+    double test = -1.25;
     Rational<int> result = Rational<int>::convertFloatRatio(test,1000);
     std::cout << result << std::endl;
     return 0;
