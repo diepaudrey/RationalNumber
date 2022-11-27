@@ -31,6 +31,46 @@ TEST (RationalArithmetic, plus) {
 	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
 
 	// run many times the same test with different values
+	
+
+
+    float number1 = 5.555555;
+    float number2 = 8.6545;
+    
+	Rational<int> fraction1 = Rational<int>::convertFloatRatio(number1,1000);
+	Rational<int> fraction2 = Rational<int>::convertFloatRatio(number2,1000);
+		
+    	
+		Rational<int> expectedResult = Rational<int>::convertFloatRatio((number1+number2),100);
+		Rational<int> actualResult = fraction1+fraction2;
+		Rational<int>  epsilon(1,10000000);
+		
+		Rational<int> difference = (actualResult-expectedResult);
+
+		std::cout<< "f1: "<< fraction1 <<std::endl;
+		std::cout<< "f2: "<< fraction2 <<std::endl;
+		std::cout<< "n1+n2: "<< number1 + number2 <<std::endl;
+		std::cout<< "f1+f2: "<< expectedResult <<std::endl;
+		std::cout<< "actual: "<< actualResult <<std::endl;
+		std::cout<< "difference: "<< difference <<std::endl;
+
+	  ASSERT_LT (difference.vabs(), epsilon);    // EXPECT_DOUBLE_EQ would be fine too
+
+
+}
+
+
+
+/*
+TEST (RationalArithmetic, plus) {
+
+	const size_t maxSize = 1000;  // max size of the tested vectors
+	std::mt19937 generator(0);
+	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
+	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
+	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
+
+	// run many times the same test with different values
 	for(int run=0; run<100; ++run){
 
 
@@ -53,7 +93,7 @@ TEST (RationalArithmetic, plus) {
 
 	}
 }
-
+*/
 
 // TEST (VectorDArithmetic, minus) {
 

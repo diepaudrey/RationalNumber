@@ -192,7 +192,6 @@ Rational<T> Rational<T>::operator+(const Rational<T> &r) const{
     result.m_denominator=(m_denominator*r.m_denominator);
     return result.irreducibleFraction();
 }
-//do an affectation operator with = ?
 
 template<typename T>
 Rational<T> Rational<T>::operator-() const{
@@ -312,7 +311,7 @@ Rational<T> Rational<T>::vabs(){
     //check si ça ne change pas sinon mettre une variable result
     //comme dans l'inverse (update: ça a l'air good)
     if(this->m_numerator*this->m_denominator<0){
-        return -*this;
+        return -(*this);
     }
     return *this;
 }
@@ -335,7 +334,7 @@ int Rational<T>::intPart(double x){
 /// \return the output stream containing the rational data      
 template<typename T>
 std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
-    if (r.getNumerator() == 0){
+    if (r.getDenominator() == 0){
         stream<< "error : division by 0";
     }
     else if (r.getNumerator() == 0){
