@@ -171,11 +171,19 @@ class Rational{
         /// \return : the absolute value of the current rational
         Rational<T> vabs();
 
+        /// \brief take the integer part of a Rational
+        /// \return : integer part of the Rational
+        static int intPart(double x);
+        
+        
         /// \brief convert a float to ratio
         /// \return : a rational
         static Rational<T> convertFloatRatio(double x, unsigned int nbIter);
+
+
         
 };
+
 
 template<typename T>
 Rational<T> Rational<T>::operator+(const Rational<T> &r) const{
@@ -295,6 +303,7 @@ Rational<T> Rational<T>::irreducibleFraction(){
 
 template<typename T>
 Rational<T> Rational<T>::vabs(){
+    
     //-----condition 0 à revoir-----
     if(this->m_numerator==0){
         this->m_numerator=0;
@@ -307,6 +316,15 @@ Rational<T> Rational<T>::vabs(){
     }
     return *this;
 }
+
+//A voir si c'est utile
+//A voir s'il faut return un int ou un double (peut causer des bug)
+template<typename T>
+int Rational<T>::intPart(double x){
+    return int(x);
+}
+
+
 
 
 //------------cout--------------------
@@ -334,6 +352,7 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
 template<typename T>
 Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
     Rational<T> result;
+    
     if (x<0){
         return -(convertFloatRatio(-x,nbIter));
     }
@@ -344,14 +363,18 @@ Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
         return result;
     }
     if(x<1){
-        double p = 1/x;
-        Rational<int> r = convertFloatRatio(p,nbIter);
-        return r.inverse();
+        std::cout << "x = " << x << std::endl;
+        //double p = 1/x;
+        //Rational<int> r = convertFloatRatio(p,nbIter);
+        //std::cout << "inverse : " << r.inverse() << std::endl;
+        return convertFloatRatio(1/x,nbIter).inverse();
     }
     if(x>=1){
-        double pint = floor(x);
-        Rational<int> q(pint,1);
-        return q+convertFloatRatio(x-pint, nbIter-1);
+        //std::cout << "x = " << x << std::endl;
+        int integerPart = intPart(x);
+        //std::cout << "intP = " << integerPart << std::endl;
+        Rational<int> q(integerPart,1);
+        return q + convertFloatRatio((x - integerPart), nbIter-1);
     }
     return result;
 }

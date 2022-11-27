@@ -3,6 +3,7 @@
 #include <iostream>
 
 
+
 int main(){
     
     //initialize tests
@@ -44,9 +45,19 @@ int main(){
     else{
         std::cout << ":(" << std::endl;
     } 
+
+    //Test integerPart 
+    // double x = 1252.565;
+    // double fracPart, intPart;
+    // fracPart = modf(x,&intPart);
+    // std::cout << "fraction4 = " << fraction2 << std::endl;
+    // std::cout << "int part of fraction4 : " << Rational<int>::intPart(x) << " vs " << intPart << std::endl;
+
     
-    double test = -1.25;
-    Rational<int> result = Rational<int>::convertFloatRatio(test,1000);
+    double test = 0.124;
+    Rational<int> result = Rational<int>::convertFloatRatio(test,3);
     std::cout << result << std::endl;
+    std::cout << double(16.0/129) << std::endl;
+
     return 0;
 }
