@@ -31,7 +31,8 @@
 /// 	- [path to build]/doc/doc-doxygen/html/index.html or 
 /// 	- or [path to build]/INTERFACE/doc/doc-doxygen/html/index.html
 
-
+// number iteration used for function convertFloatRatio 
+int maxIter = 4 ;
 
 /// \class Rational
 /// \brief class defining a rational.
@@ -91,6 +92,11 @@ class Rational{
 	    /// \param r : the rational number the calling rational will be multplied by
 	    /// \return the multiplication of the current rational and the argument rational 
         Rational<T> operator*(const Rational<T> &r) const; 
+
+        /// \brief multiplies a rational number and a double
+	    /// \param x : a double number the calling rational will be multplied by
+	    /// \return the multiplication of the current rational and the argument rational
+        Rational<T> operator*(const double &x) const;
 
         /// \brief divides 2 rational numbers
 	    /// \param r : the rational number the calling rational will be divided by (should not have a numerator equal to 0)
@@ -181,6 +187,7 @@ class Rational{
         static Rational<T> convertFloatRatio(double x, unsigned int nbIter);
 
 
+
         
 };
 
@@ -217,6 +224,14 @@ Rational<T> Rational<T>::operator*(const Rational<T> &r) const{
     result.m_denominator=(m_denominator*r.m_denominator);
     return result.irreducibleFraction();
 }
+
+template<typename T>
+Rational<T> Rational<T>::operator*(const double &x) const{
+    Rational<T> ratioX = Rational<T>::convertFloatRatio(x,maxIter);
+
+    return ratioX*(*this);
+}
+
 
 template<typename T>
 Rational<T> Rational<T>::operator/(const Rational<T> &r) const{
@@ -349,6 +364,13 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
     return stream;
 }
 
+// template<typename T>
+// Rational<T> operator*(const Rational<T> r){
+//     Rational<T> ratioX = Rational<T>::convertFloatRatio((*this),maxIter);
+
+//     return ratioX*r;
+// }
+
 template<typename T>
 Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
     //Rational<T> result;
@@ -363,21 +385,17 @@ Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
         return Rational<T>(0,1);
     }
     if(x<1){
-        std::cout << "x = " << x << std::endl;
-        //double p = 1/x;
-        //Rational<int> r = convertFloatRatio(p,nbIter);
-        //std::cout << "inverse : " << r.inverse() << std::endl;
         return convertFloatRatio(1/x,nbIter).inverse();
     }
     if(x>=1){
-        std::cout << "x = " << x << std::endl;
+        
         int integerPart = intPart(x);
-        //std::cout << "intP = " << integerPart << std::endl;
         Rational<int> q(integerPart,1);
         return q + convertFloatRatio((x - integerPart), nbIter-1);
     }
     return Rational<T>(0,1);
 }
+
 
 
 

@@ -7,7 +7,7 @@
 int main(){
     
     //initialize tests
-    Rational<int> fraction(8,2);
+    Rational<int> fraction(21,5);
     std::cout << "fraction : " << fraction << std::endl;
 
     std::cout << "irreducible fraction : " << fraction.irreducibleFraction() << std::endl;
@@ -54,10 +54,22 @@ int main(){
     // std::cout << "int part of fraction4 : " << Rational<int>::intPart(x) << " vs " << intPart << std::endl;
 
     
-    double test = 0.1241;
+    double test = 0.124;
     Rational<int> result = Rational<int>::convertFloatRatio(test,4);
     std::cout << result << std::endl;
     std::cout << (double)result.getNumerator()/result.getDenominator() << std::endl;
+
+
+    //product between Ratio and double 
+    std::cout << "Product between rational and double : \n " << std::endl;
+    Rational<int> res_prod = fraction*test;
+    double inFloat = (double)fraction.getNumerator()/fraction.getDenominator();
+    
+    std::cout << test << " * " << fraction << " = " << res_prod << std::endl;
+    std::cout << "Product in float = " << (double)res_prod.getNumerator()/res_prod.getDenominator()<< std::endl;
+    std::cout << test << " * " << inFloat  << " = " << test*inFloat << std::endl;
+
+
 
     return 0;
 }
