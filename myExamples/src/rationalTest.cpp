@@ -54,10 +54,10 @@ int main(){
     // std::cout << "int part of fraction4 : " << Rational<int>::intPart(x) << " vs " << intPart << std::endl;
 
     
-    double test = 0.124;
-    Rational<int> result = Rational<int>::convertFloatRatio(test,3);
+    double test = 0.1241;
+    Rational<int> result = Rational<int>::convertFloatRatio(test,4);
     std::cout << result << std::endl;
-    std::cout << double(16.0/129) << std::endl;
+    std::cout << (double)result.getNumerator()/result.getDenominator() << std::endl;
 
     return 0;
 }
