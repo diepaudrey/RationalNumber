@@ -351,16 +351,16 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
 
 template<typename T>
 Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
-    Rational<T> result;
+    //Rational<T> result;
     
     if (x<0){
         return -(convertFloatRatio(-x,nbIter));
     }
     if(x==0){
-        return result;
+        return Rational<T>(0,1);
     }
     if(nbIter == 0){
-        return result;
+        return Rational<T>(0,1);
     }
     if(x<1){
         std::cout << "x = " << x << std::endl;
@@ -370,14 +370,15 @@ Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
         return convertFloatRatio(1/x,nbIter).inverse();
     }
     if(x>=1){
-        //std::cout << "x = " << x << std::endl;
+        std::cout << "x = " << x << std::endl;
         int integerPart = intPart(x);
         //std::cout << "intP = " << integerPart << std::endl;
         Rational<int> q(integerPart,1);
         return q + convertFloatRatio((x - integerPart), nbIter-1);
     }
-    return result;
+    return Rational<T>(0,1);
 }
+
 
 
 #endif
