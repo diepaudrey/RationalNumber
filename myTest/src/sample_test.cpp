@@ -1,7 +1,5 @@
 #include <random>
-#include <vector>
-#include <string>
-#include <algorithm>
+#include <cmath>
 
 #include <gtest/gtest.h>
 
@@ -79,56 +77,227 @@ TEST (RationalArithmetic, plus) {
     int numerator2 = gen();
     int denominator2 = gen();
 
-		// build the corresponding VectorD
+		// build the corresponding Rational
 		Rational<int> r1(numerator1,denominator1),r2(numerator2,denominator2);
 		
-    	//need convert float to ratio
-		Rational<int> r3;
-		r3.setNumerator(numerator1*denominator2+numerator2*denominator1);
-		r3.setDenominator(denominator1*denominator2);
-		r3.irreducibleFraction();
+    	// here it uses the traditional +
+		Rational<int> r3(r1+r2);
     
 	
-	  ASSERT_EQ (r3,r1+r2);    // EXPECT_DOUBLE_EQ would be fine too
+	  ASSERT_EQ (r3,r1+r2);   
+	}
+}
 
+TEST (RationalArithmetic, minus) {
+
+	const size_t maxSize = 1000;  // max size of the tested vectors
+	std::mt19937 generator(0);
+	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
+	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
+	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
+
+	// run many times the same test with different values
+	for(int run=0; run<100; ++run){
+
+
+    int numerator1 = gen();
+    int denominator1 = gen();
+    int numerator2 = gen();
+    int denominator2 = gen();
+
+		// build the corresponding Rational
+		Rational<int> r1(numerator1,denominator1),r2(numerator2,denominator2);
+		
+    	// here it uses the traditional -
+		Rational<int> r3(r1-r2);
+    
+	
+	  ASSERT_EQ (r3,r1-r2);   
 	}
 }
 */
 
-// TEST (VectorDArithmetic, minus) {
+TEST (RationalArithmetic, multiply) {
 
-// 	const size_t maxSize = 1000;  // max size of the tested vectors
-// 	std::mt19937 generator(0);
-// 	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
-// 	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
-// 	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
+	const size_t maxSize = 1000;  // max size of the tested vectors
+	std::mt19937 generator(0);
+	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
+	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
+	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
 
-// 	// run many times the same test with different values
-// 	for(int run=0; run<100; ++run){
+	// run many times the same test with different values
+	for(int run=0; run<100; ++run){
 
-// 		// define a vector dimension
-// 		const size_t dim = uniformIntDistribution(generator);
 
-// 		// generate random data
-// 		std::vector<double> data1(dim), data2(dim);
-// 		std::generate(data1.begin(), data1.end(), gen);
-// 		std::generate(data2.begin(), data2.end(), gen);
+    int numerator1 = gen();
+    int denominator1 = gen();
+    int numerator2 = gen();
+    int denominator2 = gen();
 
-// 		// build the corresponding VectorD
-// 		VectorD vec1(dim), vec2(dim), vec3(dim);
-// 		for(size_t i=0; i<dim; ++i){
-// 			vec1[i] = data1[i];
-// 			vec2[i] = data2[i];
-// 		}
+		// build the corresponding Rational
+		Rational<int> r1(numerator1,denominator1),r2(numerator2,denominator2);
+		
+    	// here it uses the traditional *
+		Rational<int> r3(r1*r2);
+    
+	
+	  ASSERT_EQ (r3,r1*r2);   
+	}
+}
 
-// 		vec3 = vec1 - vec2;
-// 		ASSERT_EQ (vec3.size(), dim);
+TEST (RationalArithmetic, unaryMinus) {
 
-// 		for(size_t i=0; i<dim; ++i){
-// 	    	ASSERT_DOUBLE_EQ (vec3[i], data1[i] - data2[i]);  // EXPECT_DOUBLE_EQ would be fine too
-// 		}
-// 	}
-// }
+	const size_t maxSize = 1000;  // max size of the tested vectors
+	std::mt19937 generator(0);
+	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
+	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
+	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
+
+	// run many times the same test with different values
+	for(int run=0; run<100; ++run){
+
+
+    int numerator = gen();
+    int denominator = gen();
+
+		// build the corresponding Rational
+		Rational<int> r1(numerator,denominator);
+		
+    	// here it uses the traditional unary minus
+		Rational<int> r3(-r1);
+    
+	
+	  ASSERT_EQ (r3,-r1);   
+	}
+}
+
+TEST (RationalArithmetic, divide) {
+
+	const size_t maxSize = 1000;  // max size of the tested vectors
+	std::mt19937 generator(0);
+	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
+	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
+	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
+
+	// run many times the same test with different values
+	for(int run=0; run<100; ++run){
+
+
+    int numerator1 = gen();
+    int denominator1 = gen();
+    int numerator2 = gen();
+    int denominator2 = gen();
+
+		// build the corresponding Rational
+		Rational<int> r1(numerator1,denominator1),r2(numerator2,denominator2);
+		
+    	// here it uses the traditional /
+		Rational<int> r3(r1/r2);
+    
+	
+	  ASSERT_EQ (r3,r1/r2);   
+	}
+}
+
+TEST (RationalArithmetic, inverse) {
+
+	const size_t maxSize = 1000;  // max size of the tested vectors
+	std::mt19937 generator(0);
+	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
+	std::uniform_real_distribution<double> uniformDistributionValue(1,maxSize); //start at 1 to avoid having a 0 
+	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
+
+	// run many times the same test with different values
+	for(int run=0; run<100; ++run){
+
+    int numerator = gen();
+    int denominator = gen();
+
+		// build the corresponding Rational
+		Rational<int> r1(numerator,denominator);
+		
+    	// swap numerator and denominator
+		Rational<int> r3(denominator,numerator);
+    
+	
+	  ASSERT_EQ (r3,r1.inverse());   
+	}
+}
+
+TEST (RationalArithmetic, irreducibleFraction) {
+
+	const size_t maxSize = 1000;  // max size of the tested vectors
+	std::mt19937 generator(0);
+	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
+	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize); //start at 1 to avoid having a 0 
+	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
+
+	// run many times the same test with different values
+	for(int run=0; run<100; ++run){
+
+    int numerator = gen();
+    int denominator = gen();
+	int pgcd = std::__gcd(numerator,denominator);
+
+		// build the corresponding Rational
+		Rational<int> r1(numerator,denominator);
+		
+    	//divide the numerator & denominatorby the pgcd
+		Rational<int> r3(numerator/pgcd,denominator/pgcd);
+    
+	
+	  ASSERT_EQ (r3,r1);   
+	}
+}
+
+TEST (RationalArithmetic, absoluteValue) {
+
+	const size_t maxSize = 1000;  // max size of the tested vectors
+	std::mt19937 generator(0);
+	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
+	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize); //start at 1 to avoid having a 0 
+	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
+
+	// run many times the same test with different values
+	for(int run=0; run<100; ++run){
+
+    int numerator = gen();
+    int denominator = gen();
+
+		// build the corresponding Rational
+		Rational<int> r1(numerator,denominator);
+		
+    	//divide the numerator & denominatorby the pgcd
+		Rational<int> r3(abs(numerator),abs(denominator));
+    
+	
+	  ASSERT_EQ (r3,r1.vabs());   
+	}
+}
+
+TEST (RationalArithmetic, integerPart) {
+
+	const size_t maxSize = 1000;  // max size of the tested vectors
+	std::mt19937 generator(0);
+	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
+	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize); //start at 1 to avoid having a 0 
+	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
+
+	// run many times the same test with different values
+	for(int run=0; run<100; ++run){
+
+    	double number = gen();
+	
+		int expectedRes = (int)number;
+		int libRes = Rational<int>::intPart(number);
+    
+	
+	  ASSERT_EQ (expectedRes,libRes);
+	}
+}
+
+
+
 
 
 // /////////////////////////////////////////////////////
