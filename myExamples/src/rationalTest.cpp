@@ -47,7 +47,7 @@ int main(){
     } 
 
     //Test integerPart 
-    // double x = 1252.565;
+    // double x = 1252.765;
     // double fracPart, intPart;
     // fracPart = modf(x,&intPart);
     // std::cout << "fraction4 = " << fraction2 << std::endl;
@@ -55,20 +55,26 @@ int main(){
 
     
     double test = 0.124;
-    Rational<int> result = Rational<int>::convertFloatRatio(test,5);
+    Rational<int> result = Rational<int>::convertFloatRatio(test,10);
     std::cout << result << std::endl;
     std::cout << (double)result.getNumerator()/result.getDenominator() << std::endl;
 
+    // //troncature test 
+    // double x = 0.1256389975;
+    // std::cout <<"x = "<<  x << std::endl;
+    // std::cout <<"troncature de x = " << troncature(x) << std::endl;
 
-    //product between Ratio and double 
-    std::cout << "Product between rational and double : \n " << std::endl;
-    Rational<int> res_prod = fraction*test;
-    double inFloat = (double)fraction.getNumerator()/fraction.getDenominator();
+
+    // //product between Ratio and double 
+    // std::cout << "Product between rational and double : \n " << std::endl;
+    // Rational<int> res_prod = fraction*test;
+    // double inFloat = (double)fraction.getNumerator()/fraction.getDenominator();
     
-    std::cout << test << " * " << fraction << " = " << res_prod << std::endl;
-    std::cout << "Product in float = " << (double)res_prod.getNumerator()/res_prod.getDenominator()<< std::endl;
-    std::cout << test << " * " << inFloat  << " = " << test*inFloat << std::endl;
+    // std::cout << test << " * " << fraction << " = " << res_prod << std::endl;
+    // std::cout << "Product in float = " << (double)res_prod.getNumerator()/res_prod.getDenominator()<< std::endl;
+    // std::cout << test << " * " << inFloat  << " = " << test*inFloat << std::endl;
 
+    
 
 
     return 0;

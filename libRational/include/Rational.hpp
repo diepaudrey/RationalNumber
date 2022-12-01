@@ -1,7 +1,7 @@
 //hihi
 
 #include <cmath>
-#include<cassert>
+#include <cassert>
 #include <iostream>
 #include <algorithm>
 #include <fstream>
@@ -335,6 +335,7 @@ Rational<T> Rational<T>::vabs(){
 //A voir s'il faut return un int ou un double (peut causer des bug)
 template<typename T>
 int Rational<T>::intPart(double x){
+
     return int(x);
 }
 
@@ -371,9 +372,17 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
 // }
 
 template<typename T>
+T troncature(T x){
+    x = x*10000;
+    x = (double)floor(x); 
+    x /= 10000;
+    return x;
+}
+
+template<typename T>
 Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
     //Rational<T> result;
-    
+    x = troncature(x);
     if (x<0){
         return -(convertFloatRatio(-x,nbIter));
     }
@@ -391,7 +400,7 @@ Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
         std::cout << " x >= 1 : " << x << std::endl;
         int integerPart = intPart(x);
         Rational<int> q(integerPart,1);
-        return q + convertFloatRatio((x - integerPart), nbIter-1);
+        return q + convertFloatRatio((x-integerPart), nbIter-1);
     }
     return Rational<T>(0,1);
 }
