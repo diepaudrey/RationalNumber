@@ -55,7 +55,7 @@ int main(){
 
     
     double test = 0.124;
-    Rational<int> result = Rational<int>::convertFloatRatio(test,4);
+    Rational<int> result = Rational<int>::convertFloatRatio(test,5);
     std::cout << result << std::endl;
     std::cout << (double)result.getNumerator()/result.getDenominator() << std::endl;
 

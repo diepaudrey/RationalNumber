@@ -384,10 +384,11 @@ Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
         return Rational<T>(0,1);
     }
     if(x<1){
+        std::cout << " x < 1 : " << x << std::endl;
         return convertFloatRatio(1/x,nbIter).inverse();
     }
     if(x>=1){
-        
+        std::cout << " x >= 1 : " << x << std::endl;
         int integerPart = intPart(x);
         Rational<int> q(integerPart,1);
         return q + convertFloatRatio((x - integerPart), nbIter-1);
