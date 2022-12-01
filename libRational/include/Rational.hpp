@@ -385,7 +385,7 @@ Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
     x = troncature(x);
     if (x<0){
         return -(convertFloatRatio(-x,nbIter));
-    }
+    }*/
     if(x==0){
         return Rational<T>(0,1);
     }
