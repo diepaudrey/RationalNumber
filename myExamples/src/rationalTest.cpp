@@ -54,7 +54,7 @@ int main(){
     // std::cout << "int part of fraction4 : " << Rational<int>::intPart(x) << " vs " << intPart << std::endl;
 
     
-    double test = 0.124;
+    double test = -899.26;
     Rational<int> result = Rational<int>::convertFloatRatio(test,10);
     std::cout << result << std::endl;
     std::cout << (double)result.getNumerator()/result.getDenominator() << std::endl;
@@ -65,14 +65,28 @@ int main(){
     // std::cout <<"troncature de x = " << troncature(x) << std::endl;
 
 
-    // //product between Ratio and double 
+    //product between Ratio and double 
     // std::cout << "Product between rational and double : \n " << std::endl;
     // Rational<int> res_prod = fraction*test;
     // double inFloat = (double)fraction.getNumerator()/fraction.getDenominator();
-    
     // std::cout << test << " * " << fraction << " = " << res_prod << std::endl;
     // std::cout << "Product in float = " << (double)res_prod.getNumerator()/res_prod.getDenominator()<< std::endl;
     // std::cout << test << " * " << inFloat  << " = " << test*inFloat << std::endl;
+
+    // std::cout << "Product between rational and double : \n " << std::endl;
+    // Rational<int> res_prod = test*fraction;
+    // double inFloat = (double)fraction.getNumerator()/fraction.getDenominator();
+    // std::cout << test << " * " << fraction << " = " << res_prod << std::endl;
+    // std::cout << "Product in float = " << (double)res_prod.getNumerator()/res_prod.getDenominator()<< std::endl;
+    // std::cout << test << " * " << inFloat  << " = " << test*inFloat << std::endl;
+
+
+    std::cout << "Division between rational and double : \n " << std::endl;
+    Rational<int> res_division = test/fraction;
+    double inFloat = (double)fraction.getNumerator()/fraction.getDenominator();
+    std::cout << test << " / " << fraction << " = " << res_division << std::endl;
+    std::cout << "Product in float = " << (double)res_division.getNumerator()/res_division.getDenominator()<< std::endl;
+    std::cout << test << " / " << inFloat  << " = " << test/inFloat << std::endl;
 
     
 

@@ -32,7 +32,14 @@
 /// 	- or [path to build]/INTERFACE/doc/doc-doxygen/html/index.html
 
 // number iteration used for function convertFloatRatio 
-int maxIter = 4 ;
+int maxIter = 10 ;
+double epsilon = 100000;
+
+template<typename T>
+T troncature(T x, double precision){
+    return round(x*precision)/precision;
+}
+
 
 /// \class Rational
 /// \brief class defining a rational.
@@ -95,13 +102,32 @@ class Rational{
 
         /// \brief multiplies a rational number and a double
 	    /// \param x : a double number the calling rational will be multplied by
-	    /// \return the multiplication of the current rational and the argument rational
+	    /// \return the multiplication of the current rational and the argument double
         Rational<T> operator*(const double &x) const;
+
+        /// \brief multiplies a double and a rational
+	    /// \param x : a double number the calling rational will be multplied by
+        /// \param r : a rational the calling double will be multiplied by
+	    /// \return the multiplication of the current rational and the argument double
+        inline friend Rational<T> operator*(const double &x,const Rational<T> &r){return Rational<T>::convertFloatRatio(x,maxIter)*r;};
 
         /// \brief divides 2 rational numbers
 	    /// \param r : the rational number the calling rational will be divided by (should not have a numerator equal to 0)
 	    /// \return the division of the current rational and the argument rational 
         Rational<T> operator/(const Rational<T> &r) const; 
+
+
+        /// \brief divides a rational number with a double
+	    /// \param x : a double number the calling rational will divide by
+	    /// \return the division of the current rational by the argument double 
+        Rational<T> operator/(const double &x) const{return Rational<T>::convertFloatRatio(x,maxIter)/(*this);}; 
+
+        /// \brief divides a double and a rational
+	    /// \param x : a double number the calling rational will be divided by
+        /// \param r : a rational the calling double will divided 
+	    /// \return the multiplication of the current double by the argument rational
+        inline friend Rational<T> operator/(const double &x,const Rational<T> &r){return Rational<T>::convertFloatRatio(x,maxIter)/r;};
+
 
         /// \brief checks if 2 rationals are equals
 	    /// \param r : the rational number the calling rational will be compared to
@@ -179,8 +205,7 @@ class Rational{
 
         /// \brief take the integer part of a Rational
         /// \return : integer part of the Rational
-        static int intPart(double x);
-        
+        static int intPart(const double x);
         
         /// \brief convert a float to ratio
         /// \return : a rational
@@ -334,12 +359,9 @@ Rational<T> Rational<T>::vabs(){
 //A voir si c'est utile
 //A voir s'il faut return un int ou un double (peut causer des bug)
 template<typename T>
-int Rational<T>::intPart(double x){
-
+int Rational<T>::intPart(const double x){
     return int(x);
 }
-
-
 
 
 //------------cout--------------------
@@ -364,28 +386,14 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
     return stream;
 }
 
-// template<typename T>
-// Rational<T> operator*(const Rational<T> r){
-//     Rational<T> ratioX = Rational<T>::convertFloatRatio((*this),maxIter);
-
-//     return ratioX*r;
-// }
-
-template<typename T>
-T troncature(T x){
-    x = x*10000;
-    x = (double)floor(x); 
-    x /= 10000;
-    return x;
-}
 
 template<typename T>
 Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
     //Rational<T> result;
-    x = troncature(x);
+    x = troncature(x,epsilon);
     if (x<0){
         return -(convertFloatRatio(-x,nbIter));
-    }*/
+    }
     if(x==0){
         return Rational<T>(0,1);
     }
@@ -393,11 +401,11 @@ Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
         return Rational<T>(0,1);
     }
     if(x<1){
-        std::cout << " x < 1 : " << x << std::endl;
+        //std::cout << " x < 1 : " << x << std::endl;
         return convertFloatRatio(1/x,nbIter).inverse();
     }
     if(x>=1){
-        std::cout << " x >= 1 : " << x << std::endl;
+        //std::cout << " x >= 1 : " << x << std::endl;
         int integerPart = intPart(x);
         Rational<int> q(integerPart,1);
         return q + convertFloatRatio((x-integerPart), nbIter-1);
