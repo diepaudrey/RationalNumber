@@ -211,6 +211,9 @@ class Rational{
         /// \return : a rational
         static Rational<T> convertFloatRatio(double x, unsigned int nbIter);
 
+        /// \brief convert a ratio to a float
+        /// \return : a double
+        static double convertRatioFloat(Rational<T> ratio);
 
 
         
@@ -363,7 +366,6 @@ int Rational<T>::intPart(const double x){
     return int(x);
 }
 
-
 //------------cout--------------------
 
 /// \brief overload the operator << for Rational
@@ -414,6 +416,11 @@ Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
         return q + convertFloatRatio((x-integerPart), nbIter-1);
     }
     return Rational<T>(0,1);
+}
+
+template<typename T>
+double Rational<T>::convertRatioFloat(Rational<T> ratio){
+    return ((double)(ratio.getNumerator())/(ratio.getDenominator()));
 }
 
 
