@@ -389,10 +389,13 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
 
 template<typename T>
 Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
-    //Rational<T> result;
+    
     x = troncature(x,epsilon);
     if (x<0){
-        return -(convertFloatRatio(-x,nbIter));
+        Rational<T> result = -(convertFloatRatio(-x,nbIter));
+        result.setNumerator(-result.getNumerator());
+        result.setDenominator(-result.getDenominator());
+        return result;
     }
     if(x==0){
         return Rational<T>(0,1);

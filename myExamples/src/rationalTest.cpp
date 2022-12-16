@@ -89,6 +89,9 @@ int main(){
     std::cout << test << " / " << inFloat  << " = " << test/inFloat << std::endl;
 
     
+    double a = -28.1251;
+    Rational<int> a_ratio = Rational<int>::convertFloatRatio(a,5);
+    std::cout << a_ratio << std::endl;
 
     return 0;
 }
