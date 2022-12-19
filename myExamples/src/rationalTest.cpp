@@ -86,11 +86,22 @@ int main(){
     std::cout << test << " / " << fraction << " = " << res_division << std::endl;
     std::cout << "Product in float = " << (double)res_division.getNumerator()/res_division.getDenominator()<< std::endl;
     std::cout << test << " / " << inFloat  << " = " << test/inFloat << std::endl;
+
+    std::cout << "Test square root : " << std::endl;
+    Rational<int> ratio(5,4);
+    std::cout <<"Rational = " << ratio << std::endl;
+    //std::cout << std::sqrt(5)/std::sqrt(4) << std::endl;
+    std::cout << "sqrt = " <<   ratio.sqrt() << std::endl;
+    std::cout << "expectedSqrt = " <<   std::sqrt(Rational<int>::convertRatioFloat(ratio)) << std::endl;
+
 #endif 
-    
-    double a = 14.21;
-    Rational<int> a_ratio = Rational<int>::convertFloatRatio(a,maxIter);
-    std::cout << a_ratio << std::endl;
+
+    std::cout << "Rational to the power of an exponent" << std::endl;
+    Rational<int> ratio(5,2);
+    const int exp = 2;
+    std::cout <<"Rational = " << ratio << std::endl;
+    std::cout << "power = " <<   ratio.power(exp) << std::endl;
+    std::cout << "expectedSqrt = " <<   std::pow(Rational<int>::convertRatioFloat(ratio),exp) << std::endl;
 
     return 0;
 }

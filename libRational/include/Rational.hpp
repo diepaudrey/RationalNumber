@@ -33,10 +33,10 @@
 
 // number iteration used for function convertFloatRatio 
 constexpr unsigned int maxIter = 4 ;
-double precision = 1000000;
+const double precision = 100000;
 
 template<typename T>
-T troncature(T x, double precision){
+T troncature(T x, const double precision){
     return round(x*precision)/precision;
 }
 
@@ -160,6 +160,17 @@ class Rational{
         bool operator>=(const Rational<T> &r) const;
 
 
+        //------------other operation----------
+
+        /// \brief square root of a rational
+	    /// \return a double corresponding at the square root of the rational
+        double sqrt();
+
+        /// \brief Computes the value of the rational raised to the power exp.
+        /// \param exp : exponent as a value of integral type
+	    /// \return a double corresponding to a rational to the power of the exposant
+        Rational<T> power(const int exp);
+
         //------------setters-getters-----
 
         //utile pour les test unitaire c'ets pour ça c'est mieux d'avoir les test dans la lib 
@@ -189,7 +200,7 @@ class Rational{
 
         
 
-        //------------arithmetic----------*
+        //------------functions----------
         
         /// \brief inverses the current rational and put it into its irreductible form
         /// \return : the inverse of the current rational under its irreductible form
@@ -207,6 +218,7 @@ class Rational{
         /// \return : the absolute value of the current rational
         Rational<T> vabs();
 
+
         /// \brief take the integer part of a Rational
         /// \return : integer part of the Rational
         static int intPart(const double x);
@@ -221,8 +233,11 @@ class Rational{
 
 
         
+        
+        
 };
 
+//------------operator----------
 
 template<typename T>
 Rational<T> Rational<T>::operator+(const Rational<T> &r) const{
@@ -323,10 +338,25 @@ bool Rational<T>::operator<=(const Rational<T> &r) const{
         return false;
     }
     return true;
-
 }
 
-//-------------function-----------------
+//------------other operators----------
+
+template<typename T>
+double Rational<T>::sqrt(){
+    double result = std::sqrt(this->m_numerator)/std::sqrt(this->m_denominator);
+    return result;
+}
+
+template<typename T>
+Rational<T> Rational<T>::power(const int exp){
+    Rational<T> result = *(this);
+    result.m_numerator = std::pow(this->m_numerator, exp);
+    result.m_denominator = std::pow(this->m_denominator, exp);
+    return result.irreducibleFraction();
+}
+
+//-------------functions-----------------
 
 template<typename T>
 Rational<T> Rational<T>::inverse()const{
