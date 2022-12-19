@@ -5,6 +5,8 @@
 
 #include "Rational.hpp"
 
+//precision of our calculation
+constexpr double epsilon = 0.1;
 
 /////////////////////////////////////////////////////
 // constructors
@@ -22,7 +24,7 @@ TEST (RationalConstructor, defaultConstructor) {
 
 TEST (RationalArithmetic, plus) {
 
-	const size_t maxSize = 1000;  // max size of the tested vectors
+	const size_t maxSize = 1000;  // max size of the tested rationals
 	std::mt19937 generator(0);
 	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
 	auto gen = std::bind(uniformDistributionValue, generator);
@@ -31,17 +33,23 @@ TEST (RationalArithmetic, plus) {
 	for(int run=0; run<100; ++run){
 		double a = gen();
 		double b = gen();
-		Rational<int> frac1 = Rational<int>::convertFloatRatio (a,4);
-		Rational<int> frac2 = Rational<int>::convertFloatRatio (b,4);
-		Rational<int> expectedResult = Rational<int>::convertFloatRatio(a+b,4);
+
+		//convert float to ratio
+		Rational<int> frac1 = Rational<int>::convertFloatRatio (a,maxIter);
+		Rational<int> frac2 = Rational<int>::convertFloatRatio (b,maxIter);
+
+		//comparison between Rational(a+b) and Rational(a) + Rational(b)
+		Rational<int> expectedResult = Rational<int>::convertFloatRatio(a+b,maxIter);
 		Rational<int> actualResult = frac1+frac2;
-		double epsilon = 0.1;
 		Rational<int> difference = (actualResult-expectedResult).vabs();
 		double differenceFloat= Rational<int>::convertRatioFloat(difference); //(double)difference.getNumerator()/difference.getDenominator();
+
+		//if you want to see the result, decomment this part
 		std::cout<< "a = " << a << " frac1 = " << frac1 << std::endl;
 		std::cout<< "b = " << b << " frac2 = " << frac2 << std::endl;
 		std::cout<< "expected = " << Rational<int>::convertRatioFloat(expectedResult)<< " actual = " << Rational<int>::convertRatioFloat(actualResult)<< std::endl;
 		std::cout<< "difference = " << differenceFloat << " epsilon = " << epsilon << std::endl;
+
 		ASSERT_LT(differenceFloat, epsilon);
 	}
 }
@@ -57,24 +65,29 @@ TEST (RationalArithmetic, minus) {
 	for(int run=0; run<100; ++run){
 		double a = gen();
 		double b = gen();
-		Rational<int> frac1 = Rational<int>::convertFloatRatio (a,4);
-		Rational<int> frac2 = Rational<int>::convertFloatRatio (b,4);
-		Rational<int> expectedResult = Rational<int>::convertFloatRatio(a-b,4);
+
+		//convert float to ratio
+		Rational<int> frac1 = Rational<int>::convertFloatRatio (a,maxIter);
+		Rational<int> frac2 = Rational<int>::convertFloatRatio (b,maxIter);
+
+		//comparison between Rational(a-b) and Rational(a) - Rational(b)
+		Rational<int> expectedResult = Rational<int>::convertFloatRatio(a-b,maxIter);
 		Rational<int> actualResult = frac1-frac2;
-		double epsilon = 0.1;
 		Rational<int> difference = (actualResult-expectedResult).vabs();
 		double differenceFloat= Rational<int>::convertRatioFloat(difference); //(double)difference.getNumerator()/difference.getDenominator();
-		std::cout<< "a- = " << a << " frac1 = " << frac1 << std::endl;
-		std::cout<< "b- = " << b << " frac2 = " << frac2 << std::endl;
-		std::cout<< "expected = " << Rational<int>::convertRatioFloat(expectedResult)<< " actual = " << Rational<int>::convertRatioFloat(actualResult)<< std::endl;
-		std::cout<< "difference = " << differenceFloat << " epsilon = " << epsilon << std::endl;
+
+		//if you want to see the result, decomment this part
+		// std::cout<< "a- = " << a << " frac1 = " << frac1 << std::endl;
+		// std::cout<< "b- = " << b << " frac2 = " << frac2 << std::endl;
+		// std::cout<< "expected = " << Rational<int>::convertRatioFloat(expectedResult)<< " actual = " << Rational<int>::convertRatioFloat(actualResult)<< std::endl;
+		// std::cout<< "difference = " << differenceFloat << " epsilon = " << epsilon << std::endl;
 		ASSERT_LT(differenceFloat, epsilon);
 	}
 }
 
 TEST (RationalArithmetic, unaryMinus) {
 
-	const size_t maxSize = 1000;  // max size of the tested vectors
+	const size_t maxSize = 1000;  //max value
 	std::mt19937 generator(0);
 	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
 	auto gen = std::bind(uniformDistributionValue, generator);
@@ -98,7 +111,7 @@ TEST (RationalArithmetic, unaryMinus) {
 
 TEST (RationalArithmetic, divide) {
 
-	const size_t maxSize = 1000;  // max size of the tested vectors
+	const size_t maxSize = 1000; 
 	std::mt19937 generator(0);
 	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
 	auto gen = std::bind(uniformDistributionValue, generator);
@@ -107,24 +120,29 @@ TEST (RationalArithmetic, divide) {
 	for(int run=0; run<100; ++run){
 		double a = gen();
 		double b = gen();
-		Rational<int> frac1 = Rational<int>::convertFloatRatio (a,4);
-		Rational<int> frac2 = Rational<int>::convertFloatRatio (b,4);
-		Rational<int> expectedResult = Rational<int>::convertFloatRatio(a/b,4);
+
+		//convert float to ratio
+		Rational<int> frac1 = Rational<int>::convertFloatRatio (a,maxIter);
+		Rational<int> frac2 = Rational<int>::convertFloatRatio (b,maxIter);
+
+		//comparison between Rational(a/b) and Rational(a) / Rational(b)
+		Rational<int> expectedResult = Rational<int>::convertFloatRatio(a/b,maxIter);
 		Rational<int> actualResult = frac1/frac2;
-		double epsilon = 0.1;
 		Rational<int> difference = (actualResult-expectedResult).vabs();
 		double differenceFloat= Rational<int>::convertRatioFloat(difference); //(double)difference.getNumerator()/difference.getDenominator();
+
+		//if you want to see the result, decomment this part
 		std::cout<< "a/ = " << a << " frac1 = " << frac1 << std::endl;
 		std::cout<< "b/ = " << b << " frac2 = " << frac2 << std::endl;
-		std::cout<< "expected = " << Rational<int>::convertRatioFloat(expectedResult)<< " actual = " << Rational<int>::convertRatioFloat(actualResult)<< std::endl;
-		std::cout<< "difference = " << differenceFloat << " epsilon = " << epsilon << std::endl;
+		//std::cout<< "expected = " << Rational<int>::convertRatioFloat(expectedResult)<< " actual = " << Rational<int>::convertRatioFloat(actualResult)<< std::endl;
+		//std::cout<< "difference = " << differenceFloat << " epsilon = " << epsilon << std::endl;
 		ASSERT_LT(differenceFloat, epsilon); 
 	}
 }
 
 TEST (RationalArithmetic, multiply) {
 
-	const size_t maxSize = 1000;  // max size of the tested vectors
+	const size_t maxSize = 1000;  
 	std::mt19937 generator(0);
 	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
 	auto gen = std::bind(uniformDistributionValue, generator);
@@ -133,11 +151,12 @@ TEST (RationalArithmetic, multiply) {
 	for(int run=0; run<100; ++run){
 		double a = gen();
 		double b = gen();
+
 		Rational<int> frac1 = Rational<int>::convertFloatRatio (a,3);
 		Rational<int> frac2 = Rational<int>::convertFloatRatio (b,3);
 		Rational<int> expectedResult = Rational<int>::convertFloatRatio(a*b,3);
 		Rational<int> actualResult = frac1*frac2;
-		double epsilon = 50;
+
 		Rational<int> difference = (actualResult-expectedResult).vabs();
 		double differenceFloat= Rational<int>::convertRatioFloat(difference); //(double)difference.getNumerator()/difference.getDenominator();
 		std::cout<< "a* = " << a << " frac1 = " << frac1 << std::endl;

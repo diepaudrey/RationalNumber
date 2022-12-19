@@ -32,8 +32,8 @@
 /// 	- or [path to build]/INTERFACE/doc/doc-doxygen/html/index.html
 
 // number iteration used for function convertFloatRatio 
-int maxIter = 10 ;
-double epsilon = 100000;
+constexpr unsigned int maxIter = 4 ;
+double precision = 1000000;
 
 template<typename T>
 T troncature(T x, double precision){
@@ -199,6 +199,10 @@ class Rational{
         /// \return : the current rational under its irreductible form
         Rational<T> irreducibleFraction() ;
 
+        /// \brief if the rational is < 0, put the sign on the numerator
+        /// \return : the rational with a minus on the numerator
+        Rational<T> setMinus() ;
+
         /// \brief computes the absolute value of the current rational
         /// \return : the absolute value of the current rational
         Rational<T> vabs();
@@ -343,6 +347,15 @@ Rational<T> Rational<T>::irreducibleFraction(){
     return *(this);
 }
 
+template<typename T> 
+Rational<T> Rational<T>::setMinus(){
+    if(this->getNumerator() > 0 && this->getDenominator() < 0){
+        this->setNumerator(-this->getNumerator());
+        this->setDenominator(-this->getDenominator());
+    }
+    return *(this);
+}
+
 template<typename T>
 Rational<T> Rational<T>::vabs(){
     
@@ -392,12 +405,12 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
 template<typename T>
 Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
     
-    x = troncature(x,epsilon);
+    //x = troncature(x,precision);
     if (x<0){
         Rational<T> result = -(convertFloatRatio(-x,nbIter));
-        result.setNumerator(-result.getNumerator());
-        result.setDenominator(-result.getDenominator());
-        return result;
+        // result.setNumerator(-result.getNumerator());
+        // result.setDenominator(-result.getDenominator());
+        return result.setMinus();
     }
     if(x==0){
         return Rational<T>(0,1);

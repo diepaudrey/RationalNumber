@@ -3,9 +3,8 @@
 #include <iostream>
 
 
-
 int main(){
-    
+#if 0
     //initialize tests
     Rational<int> fraction(21,5);
     std::cout << "fraction : " << fraction << std::endl;
@@ -79,7 +78,7 @@ int main(){
     // std::cout << test << " * " << fraction << " = " << res_prod << std::endl;
     // std::cout << "Product in float = " << (double)res_prod.getNumerator()/res_prod.getDenominator()<< std::endl;
     // std::cout << test << " * " << inFloat  << " = " << test*inFloat << std::endl;
-
+    
 
     std::cout << "Division between rational and double : \n " << std::endl;
     Rational<int> res_division = test/fraction;
@@ -87,10 +86,10 @@ int main(){
     std::cout << test << " / " << fraction << " = " << res_division << std::endl;
     std::cout << "Product in float = " << (double)res_division.getNumerator()/res_division.getDenominator()<< std::endl;
     std::cout << test << " / " << inFloat  << " = " << test/inFloat << std::endl;
-
+#endif 
     
-    double a = -28.1251;
-    Rational<int> a_ratio = Rational<int>::convertFloatRatio(a,5);
+    double a = 14.21;
+    Rational<int> a_ratio = Rational<int>::convertFloatRatio(a,maxIter);
     std::cout << a_ratio << std::endl;
 
     return 0;
