@@ -3,79 +3,82 @@
 #include <iostream>
 
 
+//You can change value of num and deno to test
+const long int num1= 20;
+const long int deno1 = 5;
+const long int num2= 2;
+const long int deno2 = 5;
+const double lambda = 6.8;
+
+//for conversion from a float to ratio
+double test = 0.33333333333333333333333333;
+
+
+void exampleConstructors(){
+    
+    Rational<int> ratioDefault;
+    Rational<int> ratio(num1,deno1);
+    Rational<int> ratioCopy = ratio;
+
+    std::cout << "Constructors example : " << std::endl;
+    std::cout << "Numerator = " << num1 << " Denominator = " << deno1 << std::endl; 
+    std::cout << " - Default constructor : " << ratioDefault << std::endl;
+    std::cout << " - Constructor by value : " << ratio << std::endl;
+    std::cout << " - Copy constructor : " << ratioCopy << "\n" << std::endl;
+
+}
+
+void exampleArithmetic(){
+    Rational<long int> ratio1(num1, deno1);
+    Rational<long int> ratio2(num2, deno2);
+    std::cout << "Operators example : " << std::endl;
+
+    //Operator + 
+    std::cout << "ratio1 + ratio2 = " << ratio1 << " + " << ratio2 << " = " << ratio1+ratio2 << std::endl;
+
+    //Opeator - 
+    std::cout << "ratio1 - ratio2 = " << ratio1 << " - " << ratio2 << " = " << ratio1-ratio2 << std::endl;
+    std::cout << "-ratio1 = " << -ratio1 << std::endl;
+
+    //Operator * 
+    std::cout << "ratio1 * ratio2 = " << ratio1 << " * " << ratio2 << " = " << ratio1*ratio2 << std::endl;
+    std::cout << "lambda * ratio1 = " << lambda << " * " << ratio1<< " = " << lambda*ratio1 << std::endl;
+    std::cout << "ratio1 * lambda = " << ratio1 << " * " << lambda << " = " << ratio1*lambda << "\n" <<  std::endl;
+
+    //Operator / 
+    std::cout << "Division between 2 rationals : " << std::endl;
+    std::cout << "ratio1 / ratio2 = " << ratio1 << " / " << ratio2 << " = " << ratio1/ratio2 << std::endl;
+
+    std::cout << "Division between rational and double : \n " << std::endl;
+    std::cout << "lambda / ratio2 = " << lambda << " / " << ratio1 << " = " << lambda/ratio1<< std::endl;
+    std::cout << "ratio1 / lambda = " << ratio1 << " / " << lambda << " = " << ratio1/lambda<< "\n" << std::endl;
+
+    //Operator square root
+    std::cout << "Test square root : " << std::endl;
+    std::cout <<"ratio1 = " << ratio1 << std::endl;
+    std::cout << "sqrt(ratio1) = " <<   Rational<long int>::sqrt(ratio1) << std::endl;
+    std::cout << "expectedSqrt = " <<   std::sqrt(Rational<long int>::convertRatioFloat(ratio1)) << "\n"<< std::endl;
+
+    std::cout <<"ratio2 = " << ratio2 << std::endl;
+    std::cout << "sqrt(ratio2) = " <<   Rational<long int>::sqrt(ratio2) << std::endl;
+    std::cout << "expectedSqrt = " <<   std::sqrt(Rational<long int>::convertRatioFloat(ratio2)) << "\n"<< std::endl;
+
+}
+
+void exampleConversion(){
+
+    std::cout << "Convert Float to Rational test : " << std::endl;
+    Rational<int> result = Rational<int>::convertFloatRatio(test,3); //modifier le nombre d'iteration
+    std::cout << "expectedValue : " << test << std::endl;
+    std::cout << "convert result :  " << result << std::endl;
+    std::cout << "actualValue : " << Rational<int>::convertRatioFloat(result) << "\n" << std::endl;
+}
+
 int main(){
+    exampleConstructors();
+    exampleArithmetic();
+    exampleConversion();
 #if 0
-    //initialize tests
-    Rational<int> fraction(21,5);
-    std::cout << "fraction : " << fraction << std::endl;
-
-    std::cout << "irreducible fraction : " << fraction.irreducibleFraction() << std::endl;
-
-    //copy constructor
-    Rational<int> fraction2(4,2);
-    
-    Rational<int> fraction3 = fraction - fraction2;
-    //std::cout << "numerateur3 : " << fraction3.m_numerator << std::endl;
-    //std::cout << "deno3 : " << fraction3.m_denominator << std::endl;
-
-    std::cout << fraction << " - " << fraction2 << " = " << fraction3 << std::endl;
-
-
-    //testing comparative operators
-    //bool result = fraction!=fraction2;
-    //std::cout << result << std::endl; 
-
-    bool result2 = fraction<fraction2;
-    std::cout << result2 << std::endl; 
-
-    Rational<int> fraction4(-2,-1);
-
-    std::cout << fraction4 << std::endl;
-    std::cout << -fraction4 << std::endl;
-    std::cout << fraction4 << std::endl;
-    std::cout << fraction4.inverse() << std::endl;
-    std::cout << fraction4.vabs() << std::endl;
-    std::cout << fraction4 << std::endl;
-
-    if (fraction4 == fraction2)
-    {
-        std::cout << "wouw" << std::endl;
-    }
-    else{
-        std::cout << ":(" << std::endl;
-    } 
-
-    //Test integerPart 
-    // double x = 1252.765;
-    // double fracPart, intPart;
-    // fracPart = modf(x,&intPart);
-    // std::cout << "fraction4 = " << fraction2 << std::endl;
-    // std::cout << "int part of fraction4 : " << Rational<int>::intPart(x) << " vs " << intPart << std::endl;
-
-    
-    
-
-    // //troncature test 
-    // double x = 0.1256389975;
-    // std::cout <<"x = "<<  x << std::endl;
-    // std::cout <<"troncature de x = " << troncature(x) << std::endl;
-
-
-    //product between Ratio and double 
-    // std::cout << "Product between rational and double : \n " << std::endl;
-    // Rational<int> res_prod = fraction*test;
-    // double inFloat = (double)fraction.getNumerator()/fraction.getDenominator();
-    // std::cout << test << " * " << fraction << " = " << res_prod << std::endl;
-    // std::cout << "Product in float = " << (double)res_prod.getNumerator()/res_prod.getDenominator()<< std::endl;
-    // std::cout << test << " * " << inFloat  << " = " << test*inFloat << std::endl;
-
-    // std::cout << "Product between rational and double : \n " << std::endl;
-    // Rational<int> res_prod = test*fraction;
-    // double inFloat = (double)fraction.getNumerator()/fraction.getDenominator();
-    // std::cout << test << " * " << fraction << " = " << res_prod << std::endl;
-    // std::cout << "Product in float = " << (double)res_prod.getNumerator()/res_prod.getDenominator()<< std::endl;
-    // std::cout << test << " * " << inFloat  << " = " << test*inFloat << std::endl;
-    
 
     std::cout << "Division between rational and double : \n " << std::endl;
     Rational<int> res_division = test/fraction;
@@ -106,9 +109,6 @@ int main(){
     std::cout << "power = " <<   Rational<int>::power(ratioPow, exp) << std::endl;
     std::cout << "expectedSqrt = " <<   Rational<int>::convertFloatRatio(std::pow(Rational<int>::convertRatioFloat(ratioPow),exp),maxIter) << "\n" << std::endl;
 
-    
-#endif 
-
     std::cout << "Exponential test : " <<std::endl;
     Rational<int> ratioExp(4,3);
     std::cout << "expectedResult = " << std::exp(4.0/3) << std::endl;
@@ -118,6 +118,9 @@ int main(){
     Rational<int> ratioLog(4,3);
     std::cout << "expectedResult = " << std::log2(4.0/3) << std::endl;
     std::cout << "actualResult = " << Rational<int>::log2(ratioLog) << "\n" << std::endl;
+#endif 
+
+    
     
     return 0;
 }

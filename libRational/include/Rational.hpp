@@ -103,13 +103,19 @@ class Rational{
         /// \brief multiplies a rational number and a double
 	    /// \param x : a double number the calling rational will be multplied by
 	    /// \return the multiplication of the current rational and the argument double
-        Rational<T> operator*(const double &x) const;
+        Rational<T> operator*(const T &x) const;
 
         /// \brief multiplies a double and a rational
 	    /// \param x : a double number the calling rational will be multplied by
         /// \param r : a rational the calling double will be multiplied by
-	    /// \return the multiplication of the current rational and the argument double
+	    /// \return the multiplication of the double argument and the rational argument
         inline friend Rational<T> operator*(const double &x,const Rational<T> &r){return Rational<T>::convertFloatRatio(x,maxIter)*r;};
+
+        /// \brief multiplies a rational and a double
+	    /// \param x : a double number the calling rational will be multplied by
+        /// \param r : a rational the calling double will be multiplied by
+	    /// \return the multiplication of the rational argument and the double argument
+        inline friend Rational<T> operator*(const Rational<T> &r,const double &x){return Rational<T>::convertFloatRatio(x,maxIter)*r;}
 
         /// \brief divides 2 rational numbers
 	    /// \param r : the rational number the calling rational will be divided by (should not have a numerator equal to 0)
@@ -120,13 +126,19 @@ class Rational{
         /// \brief divides a rational number with a double
 	    /// \param x : a double number the calling rational will divide by
 	    /// \return the division of the current rational by the argument double 
-        Rational<T> operator/(const double &x) const{return Rational<T>::convertFloatRatio(x,maxIter)/(*this);}; 
+        Rational<T> operator/(const T &x) const{return Rational<T>::convertFloatRatio(x,maxIter)/(*this);}; 
 
-        /// \brief divides a double and a rational
+        /// \brief divides a double by a rational
 	    /// \param x : a double number the calling rational will be divided by
         /// \param r : a rational the calling double will divided 
-	    /// \return the multiplication of the current double by the argument rational
+	    /// \return the division of the current double by the argument rational
         inline friend Rational<T> operator/(const double &x,const Rational<T> &r){return Rational<T>::convertFloatRatio(x,maxIter)/r;};
+
+        /// \brief divides a rational by a double
+	    /// \param x : a double number the calling rational will be divided by
+        /// \param r : a rational the calling double will divided 
+	    /// \return the multiplication of the current rational by the double argument
+        inline friend Rational<T> operator/(const Rational<T> &r, const double &x){return r/Rational<T>::convertFloatRatio(x,maxIter);};
 
 
         /// \brief checks if 2 rationals are equals
@@ -239,7 +251,7 @@ class Rational{
         
         /// \brief convert a float to ratio
         /// \return : a rational
-        static Rational<T> convertFloatRatio(double x, unsigned int nbIter);
+        static Rational<T> convertFloatRatio(double x, const unsigned int nbIter);
 
         /// \brief convert a ratio to a float
         /// \return : a double
@@ -286,7 +298,7 @@ Rational<T> Rational<T>::operator*(const Rational<T> &r) const{
 }
 
 template<typename T>
-Rational<T> Rational<T>::operator*(const double &x) const{
+Rational<T> Rational<T>::operator*(const T &x) const{
     Rational<T> ratioX = Rational<T>::convertFloatRatio(x,maxIter);
 
     return ratioX*(*this);
@@ -460,13 +472,11 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
 
 
 template<typename T>
-Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
+Rational<T> Rational<T>::convertFloatRatio(double x, const unsigned int nbIter){
     
-    x = troncature(x);
+    //x = troncature(x);
     if (x<0){
         Rational<T> result = -(convertFloatRatio(-x,nbIter));
-        // result.setNumerator(-result.getNumerator());
-        // result.setDenominator(-result.getDenominator());
         return result.setMinus();
     }
     if(x==0){

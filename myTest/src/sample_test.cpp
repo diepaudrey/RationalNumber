@@ -250,10 +250,10 @@ TEST (RationalOperation, exponential) {
 		const double differenceFloat = std::abs(actualResult - expectedResult);
 		
 		//if you want to see the result, decomment this part
-		std::cout << "ratio = " << ratio << std::endl; 
-		std::cout << "expected = " << expectedResult << std::endl;
-		std::cout << "actual = " << actualResult << std::endl;
-		std::cout << "diff = " << differenceFloat << '\n' << std::endl;
+		// std::cout << "ratio = " << ratio << std::endl; 
+		// std::cout << "expected = " << expectedResult << std::endl;
+		// std::cout << "actual = " << actualResult << std::endl;
+		// std::cout << "diff = " << differenceFloat << '\n' << std::endl;
 
 		ASSERT_LT(differenceFloat, epsilon); 
 	}
@@ -278,10 +278,10 @@ TEST (RationalOperation, logarithm) {
 		const double differenceFloat = std::abs(actualResult - expectedResult);
 		
 		//if you want to see the result, decomment this part
-		std::cout << "ratio = " << ratio << std::endl; 
-		std::cout << "expected = " << expectedResult << std::endl;
-		std::cout << "actual = " << actualResult << std::endl;
-		std::cout << "diff = " << differenceFloat << '\n' << std::endl;
+		// std::cout << "ratio = " << ratio << std::endl; 
+		// std::cout << "expected = " << expectedResult << std::endl;
+		// std::cout << "actual = " << actualResult << std::endl;
+		// std::cout << "diff = " << differenceFloat << '\n' << std::endl;
 
 		ASSERT_LT(differenceFloat, epsilon); 
 	}
@@ -382,8 +382,6 @@ TEST (RationalConversion, FloatToRatio) {
 	  ASSERT_LT(difference,epsilon);
 	}
 }
-
-
 
 
 int main(int argc, char **argv) {
