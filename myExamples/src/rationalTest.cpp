@@ -53,10 +53,7 @@ int main(){
     // std::cout << "int part of fraction4 : " << Rational<int>::intPart(x) << " vs " << intPart << std::endl;
 
     
-    double test = -899.26;
-    Rational<int> result = Rational<int>::convertFloatRatio(test,10);
-    std::cout << result << std::endl;
-    std::cout << (double)result.getNumerator()/result.getDenominator() << std::endl;
+    
 
     // //troncature test 
     // double x = 0.1256389975;
@@ -87,21 +84,30 @@ int main(){
     std::cout << "Product in float = " << (double)res_division.getNumerator()/res_division.getDenominator()<< std::endl;
     std::cout << test << " / " << inFloat  << " = " << test/inFloat << std::endl;
 
+    std::cout << "Convert Float to Rational test : " << std::endl;
+    double test = 0.333333333333333333333;
+    Rational<int> result = Rational<int>::convertFloatRatio(test,10);
+    std::cout << "expectedValue : " << test << std::endl;
+    std::cout << "convert result :  " << result << std::endl;
+    std::cout << "actualValue : " << (double)result.getNumerator()/result.getDenominator() << "\n" << std::endl;
+
     std::cout << "Test square root : " << std::endl;
-    Rational<int> ratio(5,4);
-    std::cout <<"Rational = " << ratio << std::endl;
+    Rational<int> ratioSqrt(5,4);
+    std::cout <<"Rational = " << ratioSqrt << std::endl;
     //std::cout << std::sqrt(5)/std::sqrt(4) << std::endl;
-    std::cout << "sqrt = " <<   ratio.sqrt() << std::endl;
-    std::cout << "expectedSqrt = " <<   std::sqrt(Rational<int>::convertRatioFloat(ratio)) << std::endl;
+    std::cout << "sqrt = " <<   Rational<int>::sqrt(ratioSqrt) << std::endl;
+    std::cout << "expectedSqrt = " <<   std::sqrt(Rational<int>::convertRatioFloat(ratioSqrt)) << "\n"<< std::endl;
 
-#endif 
 
-    std::cout << "Rational to the power of an exponent" << std::endl;
-    Rational<int> ratio(5,2);
+    std::cout << "Rational to the power of an exponent : " << std::endl;
+    Rational<int> ratioPow(5,2);
     const int exp = 2;
-    std::cout <<"Rational = " << ratio << std::endl;
-    std::cout << "power = " <<   ratio.power(exp) << std::endl;
-    std::cout << "expectedSqrt = " <<   std::pow(Rational<int>::convertRatioFloat(ratio),exp) << std::endl;
+    std::cout <<"Rational = " << ratioPow << std::endl;
+    std::cout << "power = " <<   Rational<int>::power(ratioPow, exp) << std::endl;
+    std::cout << "expectedSqrt = " <<   Rational<int>::convertFloatRatio(std::pow(Rational<int>::convertRatioFloat(ratioPow),exp),maxIter) << "\n" << std::endl;
 
+    
+#endif 
+    
     return 0;
 }

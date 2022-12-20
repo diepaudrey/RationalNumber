@@ -32,11 +32,11 @@
 /// 	- or [path to build]/INTERFACE/doc/doc-doxygen/html/index.html
 
 // number iteration used for function convertFloatRatio 
-constexpr unsigned int maxIter = 4 ;
-const double precision = 100000;
+constexpr unsigned int maxIter = 10 ;
+constexpr double precision = 100000;
 
 template<typename T>
-T troncature(T x, const double precision){
+T troncature(T x){
     return round(x*precision)/precision;
 }
 
@@ -164,21 +164,23 @@ class Rational{
 
         /// \brief square root of a rational
 	    /// \return a double corresponding at the square root of the rational
-        double sqrt();
+        static double sqrt(const Rational<T> &r);
 
         /// \brief Computes the value of the rational raised to the power exp.
         /// \param exp : exponent as a value of integral type
 	    /// \return a double corresponding to a rational to the power of the exposant
-        Rational<T> power(const int exp);
+        static Rational<T> power(const Rational<T> &r, const int exp);
 
         //------------setters-getters-----
 
         //utile pour les test unitaire c'ets pour ça c'est mieux d'avoir les test dans la lib 
 
+
+        /// \brief setter for the numerator
         void setNumerator(const T numerator){
             m_numerator = numerator;
         };
-
+        /// \brief setter for the denominator
         void setDenominator(const T denominator){
             if(denominator != 0){
                 m_denominator = denominator;
@@ -188,13 +190,13 @@ class Rational{
 
         /// \brief getter for the numerator
         /// \return the numerator of the rational number
-        T getNumerator()const{
+        inline const T getNumerator() const{
             return m_numerator;
         }
 
         /// \brief getter for the denominator
         /// \return the denominator of the rational number
-        T getDenominator()const{
+        inline const T getDenominator()const{
             return m_denominator;
         }
 
@@ -266,8 +268,8 @@ Rational<T> Rational<T>::operator-(const Rational<T> &r) const{
 template<typename T>
 Rational<T> Rational<T>::operator*(const Rational<T> &r) const{
     Rational<T> result;
-    result.m_numerator=(m_numerator*r.m_numerator);
-    result.m_denominator=(m_denominator*r.m_denominator);
+    result.m_numerator=(this->m_numerator*r.m_numerator);
+    result.m_denominator=(this->m_denominator*r.m_denominator);
     return result.irreducibleFraction();
 }
 
@@ -343,16 +345,16 @@ bool Rational<T>::operator<=(const Rational<T> &r) const{
 //------------other operators----------
 
 template<typename T>
-double Rational<T>::sqrt(){
-    double result = std::sqrt(this->m_numerator)/std::sqrt(this->m_denominator);
+double Rational<T>::sqrt(const Rational<T> &r){
+    double result = std::sqrt(r.m_numerator)/std::sqrt(r.m_denominator);
     return result;
 }
 
 template<typename T>
-Rational<T> Rational<T>::power(const int exp){
-    Rational<T> result = *(this);
-    result.m_numerator = std::pow(this->m_numerator, exp);
-    result.m_denominator = std::pow(this->m_denominator, exp);
+Rational<T> Rational<T>::power(const Rational<T> &r, const int exp){
+    Rational<T> result;
+    result.m_numerator = std::pow(r.m_numerator, exp);
+    result.m_denominator = std::pow(r.m_denominator, exp);
     return result.irreducibleFraction();
 }
 
@@ -374,12 +376,16 @@ Rational<T> Rational<T>::irreducibleFraction(){
     this->m_numerator=this->m_numerator/pgcd;
     this->m_denominator=this->m_denominator/pgcd;
     
-    return *(this);
+    return this->setMinus();
 }
 
 template<typename T> 
 Rational<T> Rational<T>::setMinus(){
     if(this->getNumerator() > 0 && this->getDenominator() < 0){
+        this->setNumerator(-this->getNumerator());
+        this->setDenominator(-this->getDenominator());
+    }
+    else if(this->getNumerator() < 0 && this->getDenominator() < 0){
         this->setNumerator(-this->getNumerator());
         this->setDenominator(-this->getDenominator());
     }
@@ -391,8 +397,7 @@ Rational<T> Rational<T>::vabs(){
     
     //-----condition 0 à revoir-----
     if(this->m_numerator==0){
-        this->m_numerator=0;
-        this->m_denominator=1;
+        return Rational<T>(0,1);
     }
     //check si ça ne change pas sinon mettre une variable result
     //comme dans l'inverse (update: ça a l'air good)
@@ -423,9 +428,9 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
     else if (r.getNumerator() == 0){
         stream<< "0/1";
     }
-    else if (r.getNumerator()<0 && r.getDenominator()<0){
-        stream<<-r.getNumerator()<<"/"<<-r.getDenominator();
-    }
+    // else if (r.getNumerator()<0 && r.getDenominator()<0){
+    //     stream<<-r.getNumerator()<<"/"<<-r.getDenominator();
+    // }
     else
         stream<< r.getNumerator() << "/" << r.getDenominator();
     return stream;
@@ -435,7 +440,7 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
 template<typename T>
 Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
     
-    //x = troncature(x,precision);
+    x = troncature(x);
     if (x<0){
         Rational<T> result = -(convertFloatRatio(-x,nbIter));
         // result.setNumerator(-result.getNumerator());
@@ -455,7 +460,7 @@ Rational<T> Rational<T>::convertFloatRatio(double x, unsigned int nbIter){
     if(x>=1){
         //std::cout << " x >= 1 : " << x << std::endl;
         int integerPart = intPart(x);
-        Rational<int> q(integerPart,1);
+        Rational<T> q(integerPart,1);
         return q + convertFloatRatio((x-integerPart), nbIter-1);
     }
     return Rational<T>(0,1);
