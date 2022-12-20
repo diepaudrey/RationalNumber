@@ -108,6 +108,16 @@ int main(){
 
     
 #endif 
+
+    std::cout << "Exponential test : " <<std::endl;
+    Rational<int> ratioExp(4,3);
+    std::cout << "expectedResult = " << std::exp(4.0/3) << std::endl;
+    std::cout << "actualResult = " << Rational<int>::exp(ratioExp) << "\n" << std::endl;
+
+    std::cout << "Binary logarithm test : " <<std::endl;
+    Rational<int> ratioLog(4,3);
+    std::cout << "expectedResult = " << std::log2(4.0/3) << std::endl;
+    std::cout << "actualResult = " << Rational<int>::log2(ratioLog) << "\n" << std::endl;
     
     return 0;
 }

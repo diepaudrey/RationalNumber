@@ -163,6 +163,7 @@ class Rational{
         //------------other operation----------
 
         /// \brief square root of a rational
+        /// \param r : rational number 
 	    /// \return a double corresponding at the square root of the rational
         static double sqrt(const Rational<T> &r);
 
@@ -170,6 +171,17 @@ class Rational{
         /// \param exp : exponent as a value of integral type
 	    /// \return a double corresponding to a rational to the power of the exposant
         static Rational<T> power(const Rational<T> &r, const int exp);
+
+        /// \brief Computes the exponential of the rational.
+        /// \param r : rational number
+	    /// \return a double corresponding to the exponential of the parameter r
+        static double exp(const Rational<T> &r);
+
+
+        /// \brief Computes the binary logarithm of the rational.
+        /// \param r : rational number
+	    /// \return a double corresponding to the binary logarithm of the parameter r
+        static double log2(const Rational<T> &r);
 
         //------------setters-getters-----
 
@@ -356,6 +368,16 @@ Rational<T> Rational<T>::power(const Rational<T> &r, const int exp){
     result.m_numerator = std::pow(r.m_numerator, exp);
     result.m_denominator = std::pow(r.m_denominator, exp);
     return result.irreducibleFraction();
+}
+
+template<typename T>
+double Rational<T>::exp(const Rational<T> &r){
+    return std::pow(std::exp(r.m_numerator), 1.0/(r.m_denominator));
+}
+
+template<typename T>
+double Rational<T>::log2(const Rational<T> &r){
+    return std::log2(r.m_numerator) - std::log2(r.m_denominator);
 }
 
 //-------------functions-----------------

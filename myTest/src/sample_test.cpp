@@ -166,7 +166,7 @@ TEST (RationalArithmetic, multiply) {
 	}
 }
 
-TEST (RationalOperation, sqrt) {
+TEST (RationalOperation, squareRoot) {
 
 	const size_t maxSize = 1000;  
 	std::mt19937 generator(0);
@@ -198,11 +198,11 @@ TEST (RationalOperation, power) {
 
 	const size_t maxSize = 100;  
 	std::mt19937 generator(0);
-	//std::uniform_real_distribution<double> uniformDistributionValue(-(int)maxSize,maxSize);
 	std::uniform_int_distribution<int> uniformDistributionIntValueExponent(0,10);
 	std::uniform_int_distribution<int> uniformDistributionIntValue(1,100);
 	auto expGen = std::bind(uniformDistributionIntValueExponent, generator);
 	auto intGen = std::bind(uniformDistributionIntValue, generator);
+
 	// run many times the same test with different values
 	for(int run=0; run<100; ++run){
 		//generating an exponent
@@ -231,27 +231,59 @@ TEST (RationalOperation, power) {
 	}
 }
 
-TEST (RationalOperation, inverse) {
+TEST (RationalOperation, exponential) {
 
-	const size_t maxSize = 1000;  
+	const size_t maxSize = 100;  
 	std::mt19937 generator(0);
-	std::uniform_int_distribution<int> uniformDistributionValue(1,maxSize); 
+	std::uniform_int_distribution<int> uniformDistributionValue(-(int)maxSize,maxSize);
 	auto gen = std::bind(uniformDistributionValue, generator);
 
 	// run many times the same test with different values
 	for(int run=0; run<100; ++run){
+		const int num = gen();
+		const int deno = gen();
 
-		const int numerator = gen();
-		const int denominator = gen();
+		const Rational<long int> ratio(num,deno);
+		const double expectedResult = std::exp(((double)num)/deno);
+		const double actualResult = Rational<long int>::exp(ratio);
+
+		const double differenceFloat = std::abs(actualResult - expectedResult);
 		
-		// build the corresponding Rational
-		Rational<int> r1(numerator,denominator);
+		//if you want to see the result, decomment this part
+		std::cout << "ratio = " << ratio << std::endl; 
+		std::cout << "expected = " << expectedResult << std::endl;
+		std::cout << "actual = " << actualResult << std::endl;
+		std::cout << "diff = " << differenceFloat << '\n' << std::endl;
+
+		ASSERT_LT(differenceFloat, epsilon); 
+	}
+}
+
+TEST (RationalOperation, logarithm) {
+
+	const size_t maxSize = 100;  
+	std::mt19937 generator(0);
+	std::uniform_int_distribution<int> uniformDistributionValue(1,maxSize);
+	auto gen = std::bind(uniformDistributionValue, generator);
+
+	// run many times the same test with different values
+	for(int run=0; run<100; ++run){
+		const int num = gen();
+		const int deno = gen();
+
+		const Rational<long int> ratio(num,deno);
+		const double expectedResult = std::log2(((double)num)/deno);
+		const double actualResult = Rational<long int>::log2(ratio);
+
+		const double differenceFloat = std::abs(actualResult - expectedResult);
 		
-    	// swap numerator and denominator
-		Rational<int> r3(denominator,numerator);
-    
-	
-	  ASSERT_EQ (r3,r1.inverse());   
+		//if you want to see the result, decomment this part
+		std::cout << "ratio = " << ratio << std::endl; 
+		std::cout << "expected = " << expectedResult << std::endl;
+		std::cout << "actual = " << actualResult << std::endl;
+		std::cout << "diff = " << differenceFloat << '\n' << std::endl;
+
+		ASSERT_LT(differenceFloat, epsilon); 
 	}
 }
 
@@ -337,7 +369,6 @@ TEST (RationalConversion, FloatToRatio) {
 	for(int run=0; run<100; ++run){
 
     	const double number = gen();
-		
 		const Rational<long int> numberRatio = Rational<long int>::convertFloatRatio(number, maxIter);
 		const double actualResult = ((double)numberRatio.getNumerator()/numberRatio.getDenominator());
 		const double difference = std::abs(number - actualResult);
