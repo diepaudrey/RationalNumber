@@ -6,7 +6,7 @@
 #include "Rational.hpp"
 
 //precision of our calculation
-constexpr double epsilon = 0.1;
+constexpr double epsilon = 0.0001;
 
 /////////////////////////////////////////////////////
 // constructors
@@ -155,14 +155,13 @@ TEST (RationalArithmetic, multiply) {
 		const double expectedFloatResult = a*b;
 		const double differenceFloat= std::abs(actualFloatResult - expectedFloatResult) ;
 
-		//Rational<long int> difference = (actualResult-expectedResult).vabs();
-		
+		// if you want to see the result, decomment this part
 		// std::cout<< "a* = " << a << " frac1 = " << frac1 << std::endl;
 		// std::cout<< "b* = " << b << " frac2 = " << frac2 << std::endl;
 		// std::cout<< "expected = " << expectedFloatResult << " actual = " << actualFloatResult<< std::endl;
 		// std::cout<< "difference = " << differenceFloat << " epsilon = " << epsilon  << '\n' << std::endl;
 
-		ASSERT_LT(differenceFloat, epsilon); 
+		ASSERT_LT(differenceFloat, 0.1); 
 	}
 }
 

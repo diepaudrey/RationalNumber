@@ -179,18 +179,18 @@ class Rational{
 	    /// \return a double corresponding at the square root of the rational
         static double sqrt(const Rational<T> &r);
 
-        /// \brief Computes the value of the rational raised to the power exp.
+        /// \brief computes the value of the rational raised to the power exp.
         /// \param exp : exponent as a value of integral type
 	    /// \return a double corresponding to a rational to the power of the exposant
         static Rational<T> power(const Rational<T> &r, const int exp);
 
-        /// \brief Computes the exponential of the rational.
+        /// \brief computes the exponential of the rational.
         /// \param r : rational number
 	    /// \return a double corresponding to the exponential of the parameter r
         static double exp(const Rational<T> &r);
 
 
-        /// \brief Computes the binary logarithm of the rational.
+        /// \brief computes the binary logarithm of the rational.
         /// \param r : rational number
 	    /// \return a double corresponding to the binary logarithm of the parameter r
         static double log2(const Rational<T> &r);
@@ -486,11 +486,9 @@ Rational<T> Rational<T>::convertFloatRatio(double x, const unsigned int nbIter){
         return Rational<T>(0,1);
     }
     if(x<1){
-        //std::cout << " x < 1 : " << x << std::endl;
         return convertFloatRatio(1/x,nbIter).inverse();
     }
     if(x>=1){
-        //std::cout << " x >= 1 : " << x << std::endl;
         int integerPart = intPart(x);
         Rational<T> q(integerPart,1);
         return q + convertFloatRatio((x-integerPart), nbIter-1);
