@@ -11,7 +11,11 @@ const double lambda = 6.8;
 const int exponent = 2;
 
 //for conversion from a float to ratio
+<<<<<<< Updated upstream
 const double test = 0.3333333333333333;
+=======
+double test = 0.00000000005;//0.33333333333333333333333333;
+>>>>>>> Stashed changes
 
 
 void exampleConstructors(){
@@ -101,10 +105,10 @@ void exampleArithmetic(){
 void exampleConversion(){
 
     std::cout << "Convert Float to Rational test : " << std::endl;
-    Rational<long int> result = Rational<long int>::convertFloatRatio(test,10); //modifier le nombre d'iteration
+    Rational<int> result = Rational<int>::convertFloatRatio(test,7); //modifier le nombre d'iteration
     std::cout << "expectedValue : " << test << std::endl;
     std::cout << "convert result :  " << result << std::endl;
-    std::cout << "actualValue : " << Rational<long int>::convertRatioFloat(result) << "\n" << std::endl;
+    std::cout << "actualValue : " << Rational<int>::convertRatioFloat(result) << "\n" << std::endl;
 
     Rational<long int> ratio(num1, deno1);
     std::cout << "Convert Rational to Float test : " << std::endl;

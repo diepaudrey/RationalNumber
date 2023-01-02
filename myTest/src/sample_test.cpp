@@ -21,7 +21,7 @@ TEST (RationalConstructor, defaultConstructor) {
 
 TEST (RationalArithmetic, plus) {
 
-	const size_t maxSize = 1000;  // max size of the tested rationals
+	const size_t maxSize = 1000;  // interval of the tested rationals
 	std::mt19937 generator(0);
 	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
 	auto gen = std::bind(uniformDistributionValue, generator);
@@ -156,10 +156,10 @@ TEST (RationalArithmetic, multiply) {
 		const double differenceFloat= std::abs(actualFloatResult - expectedFloatResult) ;
 
 		// if you want to see the result, decomment this part
-		// std::cout<< "a* = " << a << " frac1 = " << frac1 << std::endl;
-		// std::cout<< "b* = " << b << " frac2 = " << frac2 << std::endl;
-		// std::cout<< "expected = " << expectedFloatResult << " actual = " << actualFloatResult<< std::endl;
-		// std::cout<< "difference = " << differenceFloat << " epsilon = " << epsilon  << '\n' << std::endl;
+		//std::cout<< "a* = " << a << " frac1 = " << frac1 << std::endl;
+		//std::cout<< "b* = " << b << " frac2 = " << frac2 << std::endl;
+		//std::cout<< "expected = " << expectedFloatResult << " actual = " << actualFloatResult<< std::endl;
+		//std::cout<< "difference = " << differenceFloat << " epsilon = " << 0.1  << '\n' << std::endl;
 
 		ASSERT_LT(differenceFloat, 0.1); 
 	}

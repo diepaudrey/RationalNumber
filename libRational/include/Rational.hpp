@@ -462,18 +462,28 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
 template<typename T>
 Rational<T> Rational<T>::convertFloatRatio(double x, const unsigned int nbIter){
     
+<<<<<<< Updated upstream
     //Use troncature when using Rational<int>, you can comment it for Rational<long int>
     //x = troncature(x);
+=======
+    x = troncature(x);
+>>>>>>> Stashed changes
     if (x<0){
         Rational<T> result = -(convertFloatRatio(-x,nbIter));
         return result.setMinus();
     }
-    if(x==0){
+    if(x==0){//x<0.0015 && x>-0.0015){
+        std::cout<< nbIter << ":)" <<std::endl;
         return Rational<T>(0,1);
+        
     }
     if(nbIter == 0){
         return Rational<T>(0,1);
+<<<<<<< Updated upstream
         return Rational<T>(0,1);
+=======
+        
+>>>>>>> Stashed changes
     }
     if(x<1){
         return convertFloatRatio(1/x,nbIter).inverse();
