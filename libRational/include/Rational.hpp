@@ -50,16 +50,12 @@ class Rational{
         T m_denominator;
 
     public : 
-        //constructor 
-        // Rational(const T num, const T deno)
-        //     : m_numerator(num), m_denominator(deno)
-        //     {};
+        //------------constructors----------
 
-        /// \brief constructor from given values which tests if 0 is the denominator
+        /// \brief constructor from given values in irreducible form
         /// \param num : the numerator
         /// \param num : the denominator
         Rational(const T num, const T deno){
-            assert(deno!=0 && "error: 0 is not a possible value");
             m_numerator = num;
             m_denominator = deno;
             this->irreducibleFraction();
@@ -100,9 +96,9 @@ class Rational{
 	    /// \return the multiplication of the current rational and the argument rational 
         Rational<T> operator*(const Rational<T> &r) const; 
 
-        /// \brief multiplies a rational number and a double
-	    /// \param x : a double number the calling rational will be multplied by
-	    /// \return the multiplication of the current rational and the argument double
+        /// \brief multiplies a rational number and a template type
+	    /// \param x : a template type number the calling rational will be multplied by
+	    /// \return the multiplication of the current rational and the template type argument
         Rational<T> operator*(const T &x) const;
 
         /// \brief multiplies a double and a rational
@@ -146,7 +142,7 @@ class Rational{
 	    /// \return true if the argument rational and the current are equals
         bool operator==(const Rational<T> &r)const;
 
-        /// \brief checks if 2 rationals are equals
+        /// \brief checks if 2 rationals are different
 	    /// \param r : the rational number the calling rational will be compared to
 	    /// \return true if the argument rational and the current are not equals
         bool operator!=(const Rational<T> &r) const;
@@ -158,7 +154,7 @@ class Rational{
 
         /// \brief checks if the current rational is less than the argument rational
 	    /// \param r : the rational number the calling rational will be compared to
-	    /// \return true if the current rational is less than the argument rational
+	    /// \return true if the current rational is lower than the argument rational
         bool operator<(const Rational<T> &r) const;
 
         /// \brief checks if the current rational is greater than or equal to the argument rational
@@ -168,7 +164,7 @@ class Rational{
 
         /// \brief checks if the current rational is less than or equal to the argument rational
 	    /// \param r : the rational number the calling rational will be compared to
-	    /// \return true if the current rational is less than or equal to the argument rational
+	    /// \return true if the current rational is lower than or equal to the argument rational
         bool operator>=(const Rational<T> &r) const;
 
 
@@ -196,8 +192,6 @@ class Rational{
         static double log2(const Rational<T> &r);
 
         //------------setters-getters-----
-
-        //utile pour les test unitaire c'ets pour ça c'est mieux d'avoir les test dans la lib 
 
 
         /// \brief setter for the numerator
@@ -247,16 +241,18 @@ class Rational{
 
         /// \brief take the integer part of a Rational
         /// \return : integer part of the Rational
-        static int intPart(const double x);
+        static int intPart(const double &x);
         
-        /// \brief convert a float to ratio
+        /// \brief convert a float to a rational
+        /// \param x : the float to convert
+        /// \param nbIter : the number of iteration of the function
         /// \return : a rational
         static Rational<T> convertFloatRatio(double x, const unsigned int nbIter);
 
         /// \brief convert a ratio to a float
+        /// \param ratio : the ratio to convert into a float
         /// \return : a double
         static double convertRatioFloat(Rational<T> ratio);
-
 
         
         
@@ -397,7 +393,6 @@ double Rational<T>::log2(const Rational<T> &r){
 template<typename T>
 Rational<T> Rational<T>::inverse()const{
     Rational<T> result;
-    assert(m_numerator!=0 && "error: 0 irreversible");
     result.m_numerator=m_denominator;
     result.m_denominator=m_numerator;
     return result.irreducibleFraction();
@@ -428,24 +423,19 @@ Rational<T> Rational<T>::setMinus(){
 
 template<typename T>
 Rational<T> Rational<T>::vabs(){
-    
-    //-----condition 0 à revoir-----
     if(this->m_numerator==0){
         return Rational<T>(0,1);
     }
-    //check si ça ne change pas sinon mettre une variable result
-    //comme dans l'inverse (update: ça a l'air good)
     if(this->m_numerator*this->m_denominator<0){
         return -(*this);
     }
     return *this;
 }
 
-//A voir si c'est utile
-//A voir s'il faut return un int ou un double (peut causer des bug)
 template<typename T>
-int Rational<T>::intPart(const double x){
-    return int(x);
+int Rational<T>::intPart(const double &x){
+    int res = static_cast<int>(x);
+    return res;
 }
 
 //------------cout--------------------
@@ -457,14 +447,12 @@ int Rational<T>::intPart(const double x){
 template<typename T>
 std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
     if (r.getDenominator() == 0){
-        stream<< "error : division by 0";
+        //stream<< "error : division by 0";
+        stream<< "inf";
     }
     else if (r.getNumerator() == 0){
         stream<< "0/1";
     }
-    // else if (r.getNumerator()<0 && r.getDenominator()<0){
-    //     stream<<-r.getNumerator()<<"/"<<-r.getDenominator();
-    // }
     else
         stream<< r.getNumerator() << "/" << r.getDenominator();
     return stream;
@@ -474,6 +462,7 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
 template<typename T>
 Rational<T> Rational<T>::convertFloatRatio(double x, const unsigned int nbIter){
     
+    //Use troncature when using Rational<int>, you can comment it for Rational<long int>
     //x = troncature(x);
     if (x<0){
         Rational<T> result = -(convertFloatRatio(-x,nbIter));
@@ -483,6 +472,7 @@ Rational<T> Rational<T>::convertFloatRatio(double x, const unsigned int nbIter){
         return Rational<T>(0,1);
     }
     if(nbIter == 0){
+        return Rational<T>(0,1);
         return Rational<T>(0,1);
     }
     if(x<1){

@@ -3,7 +3,7 @@
 
 
 //You can change value of num and deno to test
-const long int num1= 21;
+const long int num1= 14;
 const long int deno1 = 5;
 const long int num2= 2;
 const long int deno2 = 5;
@@ -11,7 +11,7 @@ const double lambda = 6.8;
 const int exponent = 2;
 
 //for conversion from a float to ratio
-double test = 0.33333333333333333333333333;
+const double test = 0.3333333333333333;
 
 
 void exampleConstructors(){
@@ -32,7 +32,7 @@ void exampleArithmetic(){
     Rational<long int> ratio1(num1, deno1);
     Rational<long int> ratio2(num2, deno2);
     //use for comparison
-    double ratioInFloat = Rational<long int>::convertRatioFloat(ratio1);
+    const double ratioInFloat = Rational<long int>::convertRatioFloat(ratio1);
 
     std::cout << "Operators example : " << std::endl;
 
@@ -116,8 +116,10 @@ int main(){
     
     //Show the use of constructors
     exampleConstructors();
+
     //Use every computed operations 
     exampleArithmetic();
+
     //Use the conversion from Float to Ratio and vice versa
     exampleConversion();
     
